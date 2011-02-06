@@ -18,29 +18,21 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/decoder"
-require "lib/bitmap"
-require "lib/bitmap/rbbitmap"
+require "abstract/subclass_enum"
 
 module ImageRuby
-  class Image
-    include Bitmap.bitmap_representation
+  class Bitmap
+    with_enumerable_subclasses
 
-    def initialize(width_, height_)
-      initialize_bitmap_representation(width_, height_)
-    end
+    def self.bitmap_representation
 
-    # load a image from file
-    def self.from_file(path)
+      lastmodl = nil
 
-      decoded = nil
-      File.open(path,"rb") do |file|
-        decoded = Decoder.decode(file.read)
+      Bitmap.each_subclass do |sc|
+        lastmodl = sc.modl
       end
 
-      decoded
+      lastmodl
     end
-
   end
 end
-

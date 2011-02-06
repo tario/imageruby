@@ -18,29 +18,33 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/decoder"
-require "lib/bitmap"
-require "lib/bitmap/rbbitmap"
+require "lib/color"
 
 module ImageRuby
-  class Image
-    include Bitmap.bitmap_representation
 
-    def initialize(width_, height_)
-      initialize_bitmap_representation(width_, height_)
+  module RubyBitmapModl
+
+
+    def initialize_bitmap_representation(width_, height_)
+      @width = width_
+      @height = height_
+      @array = Array.new(@width*@height)
+    end
+    # return a Color object of a given x and y coord
+    def [] (x,y)
+      @array[y*@width + x]
     end
 
-    # load a image from file
-    def self.from_file(path)
-
-      decoded = nil
-      File.open(path,"rb") do |file|
-        decoded = Decoder.decode(file.read)
-      end
-
-      decoded
+    # set a color value for a image
+    def []= (x,y,color)
+      @array[y*@width + x] = Color.coerce(color)
     end
+  end
 
+  class RubyBitmap < Bitmap
+    def self.modl
+      RubyBitmapModl
+    end
   end
 end
 
