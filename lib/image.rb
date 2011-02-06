@@ -51,6 +51,10 @@ module ImageRuby
     def encode(format)
       Decoder.encode(self,format)
     end
+
+    def inspect()
+      "#<ImageRuby::Image:#{object_id} @width=#{@width}, @height=#{@height}>"
+    end
   end
 end
 
