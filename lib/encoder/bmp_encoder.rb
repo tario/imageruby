@@ -26,5 +26,47 @@ class BmpEncoder < Encoder
     unless format == :bmp
       raise UnableToEncodeException
     end
+
+    data = String.new
+
+    totalsize = 56 + image.width * image.height * 3
+
+    data << build_bmp_header(totalsize)
+    data << build_bmp_dib_header(image)
+
+    data
+  end
+
+private
+  def build_bmp_dib_header(image)
+    data = String.new
+
+    data << [40].pack("L") #size of header
+    data << [image.width].pack("L")
+    data << [image.height].pack("L")
+    data << [1].pack("S") # nplanes
+    data << [0x18].pack("L")  # depth
+    data << [0].pack("S") # compress type
+    data << [image.width*image.height*3].pack("S") # raw bitmap data size
+
+    data << [0].pack("L") # hres
+    data << [0].pack("L") # vres
+    data << [0].pack("L") # ncolors
+    data << [0].pack("L") # nimpcolors
+
+    data
+  end
+  def build_bmp_header(totalsize)
+
+    data = String.new
+
+    data << "BM" # magic
+    data << [totalsize].pack("L") # totalsize
+    data << [0].pack("S") # creator1
+    data << [0].pack("S") # creator2
+    data << [56].pack("L") # offset
+
+    data
+
   end
 end
