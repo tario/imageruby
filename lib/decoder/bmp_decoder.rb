@@ -33,6 +33,7 @@ class BmpDecoder < Decoder
     end
 
     pixeldata_offset = header[10..13].unpack("L").first
+    pixeldata_offset = 56
 
     width = dib_header[4..7].unpack("L").first
     height = dib_header[8..11].unpack("L").first
@@ -41,10 +42,13 @@ class BmpDecoder < Decoder
 
     image = Image.new(width,height)
 
+    padding_size = ( 4 - (width * 3 % 4) ) % 4
+    width_array_len = width*3 + padding_size
+
     # read pixel data
     width.times do |x|
       height.times do |y|
-        offset = pixeldata_offset+( (y*width)+x )*3
+        offset = pixeldata_offset+y*width_array_len+x*3
         color_triplet = data[offset..offset+2]
         image[x,y] = Color.from_rgb(
             color_triplet[2],
