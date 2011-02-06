@@ -39,8 +39,6 @@ class BmpEncoder < Encoder
 
     data << "\000\000" # for allignment
 
-    p image[0,0]
-
     # write pixel data
     height.times do |y|
       width.times do |x|
