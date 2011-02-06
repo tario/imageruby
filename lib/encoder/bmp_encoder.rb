@@ -46,7 +46,7 @@ class BmpEncoder < Encoder
       width.times do |x|
 
         color = image[x,y]
-        color_triplet = [color.r].pack("C") + [color.g].pack("C") + [color.b].pack("C")
+        color_triplet = [color.b].pack("C") + [color.g].pack("C") + [color.r].pack("C")
 
         data << color_triplet
       end
