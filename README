@@ -4,8 +4,8 @@ ImageRuby is a gem for image processing written in pure ruby, this makes the lib
 
 Also, the gem was desgined to accept extensions like:
  * new format decoders made from scratch (Ruby or C)
- * new format decoders based on existent C libraries like libpng, libruby, etc...
- * new image operations
+ * new format decoders based on existent C libraries like libpng, libbmp, etc...
+ * new image operations (Ruby or C)
  * re-implementations of parts in C to improve performance on environments where it is possible
 
 == Installation
