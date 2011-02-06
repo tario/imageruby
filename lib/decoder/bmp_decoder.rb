@@ -21,7 +21,41 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 class BmpDecoder < Decoder
   def decode(data)
-    Image.new(10,10)
+    # read bmp header
+    header = data[0..13]
+    dib_header = data[14..54]
+
+    magic = header[0..1]
+
+    # check magic
+    unless magic == "BM"
+      raise UnableToDecodeException
+    end
+
+    pixeldata_offset = header[10..13].unpack("L").first
+
+    width = dib_header[4..7].unpack("L").first
+    height = dib_header[8..11].unpack("L").first
+
+    # create image object
+
+    image = Image.new(width,height)
+
+    # read pixel data
+    width.times do |x|
+      height.times do |y|
+        offset = pixeldata_offset+(y*width)+x
+        color_triplet = data[offset..offset+2]
+        image[x,y] = Color.from_rgb(
+            color_triplet[0],
+            color_triplet[1],
+            color_triplet[2]
+            )
+      end
+    end
+
+    image
+
   end
 
   def encode(image, format)
