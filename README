@@ -1,0 +1,26 @@
+= ImageRuby - flexible ruby gem for image processing
+
+ImageRuby is a gem for image processing written in pure ruby, this makes the library very portable and easy to install
+
+Also, the gem was desgined to accept extensions like:
+ * new format decoders made from scratch (Ruby or C)
+ * new format decoders based on existent C libraries like libpng, libruby, etc...
+ * new image operations
+ * re-implementations of parts in C to improve performance on environments where it is possible
+
+== Installation
+
+=== Gem installation
+
+sudo gem install imageruby
+
+== Documentation
+
+Full API documentation can be found on:
+http://tario.github.com/imageruby/doc/
+
+== Usage
+
+== Copying
+
+Copyright (c) 2011 Dario Seminara, released under the GPL License (see LICENSE)
