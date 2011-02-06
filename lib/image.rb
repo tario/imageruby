@@ -19,9 +19,11 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
 require "lib/decoder"
+require "lib/encoder"
 require "lib/bitmap"
 require "lib/bitmap/rbbitmap"
 require "lib/decoder/bmp_decoder"
+require "lib/encoder/bmp_encoder"
 
 module ImageRuby
   class Image
@@ -49,7 +51,7 @@ module ImageRuby
     end
 
     def encode(format)
-      Decoder.encode(self,format)
+      Encoder.encode(self,format)
     end
 
     def inspect()

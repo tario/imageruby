@@ -18,43 +18,27 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
+require "abstract/subclass_enum"
 
-class BmpDecoder < Decoder
-  def decode(data)
-    # read bmp header
-    header = data[0..13]
-    dib_header = data[14..54]
+class Encoder
+  with_enumerable_subclasses
 
-    magic = header[0..1]
+  class UnableToEncodeException < Exception
 
-    # check magic
-    unless magic == "BM"
-      raise UnableToDecodeException
-    end
+  end
 
-    pixeldata_offset = header[10..13].unpack("L").first
+  def self.encode(image,format)
+    Encoder.each_subclass do |sc|
+      encoder = sc.new
 
-    width = dib_header[4..7].unpack("L").first
-    height = dib_header[8..11].unpack("L").first
+      begin
+        return encoder.encode(image,format)
+      rescue UnableToEncodeException
 
-    # create image object
-
-    image = Image.new(width,height)
-
-    # read pixel data
-    width.times do |x|
-      height.times do |y|
-        offset = pixeldata_offset+(y*width)+x
-        color_triplet = data[offset..offset+2]
-        image[x,y] = Color.from_rgb(
-            color_triplet[0],
-            color_triplet[1],
-            color_triplet[2]
-            )
       end
     end
 
-    image
-
+    raise UnableToEncodeException
   end
 end
+
