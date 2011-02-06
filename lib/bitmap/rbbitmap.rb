@@ -24,6 +24,8 @@ module ImageRuby
 
   module RubyBitmapModl
 
+    attr_reader :width
+    attr_reader :height
 
     def initialize_bitmap_representation(width_, height_)
       @width = width_
