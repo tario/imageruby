@@ -29,10 +29,28 @@ class BmpEncoder < Encoder
 
     data = String.new
 
-    totalsize = 56 + image.width * image.height * 3
+    width = image.width
+    height = image.height
+
+    totalsize = 54 + width * height * 3
 
     data << build_bmp_header(totalsize)
     data << build_bmp_dib_header(image)
+
+    data << "\000\000" # for allignment
+
+    p image[0,0]
+
+    # write pixel data
+    height.times do |y|
+      width.times do |x|
+
+        color = image[x,y]
+        color_triplet = [color.r].pack("C") + [color.g].pack("C") + [color.b].pack("C")
+
+        data << color_triplet
+      end
+    end
 
     data
   end
@@ -64,7 +82,7 @@ private
     data << [totalsize].pack("L") # totalsize
     data << [0].pack("S") # creator1
     data << [0].pack("S") # creator2
-    data << [56].pack("L") # offset
+    data << [54].pack("L") # offset
 
     data
 
