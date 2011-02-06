@@ -39,6 +39,9 @@ class BmpEncoder < Encoder
 
     data << "\000\000" # for allignment
 
+    padding_size = 4 - (width * 3 % 4)
+    padding =  "\000" * padding_size
+
     # write pixel data
     height.times do |y|
       width.times do |x|
@@ -48,6 +51,9 @@ class BmpEncoder < Encoder
 
         data << color_triplet
       end
+
+      data << padding
+
     end
 
     data
