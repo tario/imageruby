@@ -30,14 +30,18 @@ module ImageRuby
       attr_accessor :a
 
       def self.from_rgb(r_,g_,b_)
-        from_rgb(r_,g_,b_,255)
+        from_rgba(r_,g_,b_,255)
       end
 
       def self.from_rgba(r_,g_,b_,a_)
-        self.r = r_
-        self.g = g_
-        self.b = b_
-        self.a = a_
+
+        c = Color.new
+        c.r = r_
+        c.g = g_
+        c.b = b_
+        c.a = a_
+
+        c
       end
 
       def self.coerce(color)
