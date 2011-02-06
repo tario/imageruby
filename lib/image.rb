@@ -21,6 +21,7 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 require "lib/decoder"
 require "lib/bitmap"
 require "lib/bitmap/rbbitmap"
+require "lib/decoder/bmp_decoder"
 
 module ImageRuby
   class Image
@@ -41,6 +42,15 @@ module ImageRuby
       decoded
     end
 
+    def save(path, format)
+      File.open(path, "wb") do |file|
+        file.write encode(format)
+      end
+    end
+
+    def encode(format)
+      Decoder.encode(self,format)
+    end
   end
 end
 

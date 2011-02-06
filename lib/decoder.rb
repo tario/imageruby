@@ -26,6 +26,9 @@ class Decoder
   class UnableToDecodeException < Exception
 
   end
+  class UnableToEncodeException < Exception
+
+  end
 
   def self.decode(data)
     Decoder.each_subclass do |sc|
@@ -39,6 +42,20 @@ class Decoder
     end
 
     raise UnableToDecodeException
+  end
+
+  def self.encode(image,format)
+    Decoder.each_subclass do |sc|
+      decoder = sc.new
+
+      begin
+        return decoder.encode(image,format)
+      rescue UnableToEncodeException
+
+      end
+    end
+
+    raise UnableToEncodeException
   end
 end
 
