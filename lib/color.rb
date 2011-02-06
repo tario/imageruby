@@ -18,41 +18,34 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/decoder"
-require "lib/color"
-
 module ImageRuby
-  class Image
+    class Color
+      class ArgumentException < Exception
 
-    attr_reader :width
-    attr_reader :height
-
-    def initialize(width_, height_)
-      @array = Array.new(width_*height_)
-      @width = width_
-      @height = height_
-    end
-
-    # load a image from file
-    def self.from_file(path)
-
-      decoded = nil
-      File.open(path,"rb") do |file|
-        decoded = Decoder.decode(file.read)
       end
 
-      decoded
-    end
+      attr_accessor :r
+      attr_accessor :g
+      attr_accessor :b
+      attr_accessor :a
 
-    # return a Color object of a given x and y coord
-    def [] (x,y)
-      @array[y*@width + x]
-    end
+      def self.from_rgb(r_,g_,b_)
+        from_rgb(r_,g_,b_,255)
+      end
 
-    # set a color value for a image
-    def []= (x,y,color)
-      @array[y*@width + x] = Color.coerce(color)
+      def self.from_rgba(r_,g_,b_,a_)
+        self.r = r_
+        self.g = g_
+        self.b = b_
+        self.a = a_
+      end
+
+      def self.coerce(color)
+        unless color.instance_of? Color
+          raise ArgumentException
+        end
+
+        color
+      end
     end
-  end
 end
-
