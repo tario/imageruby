@@ -21,6 +21,12 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 class BmpDecoder < Decoder
   def decode(data)
+    Image.new(10,10)
+  end
 
+  def encode(image, format)
+    unless format == :bmp
+      raise UnableToEncodeException
+    end
   end
 end
