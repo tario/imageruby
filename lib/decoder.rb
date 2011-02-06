@@ -18,6 +18,27 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/image"
-require "lib/decoder"
+require "abstract/subclass_enum"
+
+class Decoder
+  with_enumerable_subclasses
+
+  class UnableToDecodeException < Exception
+
+  end
+
+  def self.decode(data)
+    Decoder.each_subclass do |sc|
+      decoder = sc.new
+
+      begin
+        return decoder.decode(data)
+      rescue UnableToDecodeException
+
+      end
+    end
+
+    raise UnableToDecodeException
+  end
+end
 

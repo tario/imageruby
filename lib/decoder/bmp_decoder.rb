@@ -18,6 +18,9 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/image"
-require "lib/decoder"
 
+class BmpDecoder < Decoder
+  def decode(data)
+
+  end
+end

@@ -18,6 +18,29 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/image"
-require "lib/decoder"
+module RubyImage
+  module SubclassEnumerator
+    def each_subclass
+    end
 
+    def inherited(b)
+      @sub_classes = @sub_classes || Array.new
+      @sub_classes << b
+    end
+
+    def each_subclass
+      @sub_classes.to_a.each do |sc|
+        yield(sc)
+      end
+    end
+  end
+end
+
+class Object
+
+  def self.with_enumerable_subclasses
+    class << self
+      include RubyImage::SubclassEnumerator
+    end
+  end
+end
