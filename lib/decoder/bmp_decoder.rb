@@ -21,6 +21,7 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 class BmpDecoder < Decoder
   def decode(data)
+
     # read bmp header
     header = data[0..13]
     dib_header = data[14..54]
@@ -49,11 +50,12 @@ class BmpDecoder < Decoder
       height.times do |y|
         offset = pixeldata_offset+y*width_array_len+x*3
         color_triplet = data[offset..offset+2]
-        image[x,y] = Color.from_rgb(
-            color_triplet[2],
-            color_triplet[1],
-            color_triplet[0]
-            )
+#        image[x,y] = Color.from_rgb(
+ #           color_triplet[2],
+  #          color_triplet[1],
+   #         color_triplet[0]
+    #       )
+        image.set_point(x,y,color_triplet[2], color_triplet[1], color_triplet[0])
       end
     end
 

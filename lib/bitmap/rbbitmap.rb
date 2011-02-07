@@ -30,16 +30,32 @@ module ImageRuby
     def initialize_bitmap_representation(width_, height_)
       @width = width_
       @height = height_
-      @array = Array.new(@width*@height)
+      @array = "\000"*@width*@height*3
     end
     # return a Color object of a given x and y coord
     def [] (x,y)
-      @array[y*@width + x]
+      pointindex = (y*@width + x)*3
+      Color.from_rgb(
+        @array[pointindex],
+        @array[pointindex+1],
+        @array[pointindex+2]
+        )
+
     end
 
     # set a color value for a image
     def []= (x,y,color)
-      @array[y*@width + x] = Color.coerce(color)
+      pointindex = (y*@width + x)*3
+      @array[pointindex] = color.r
+      @array[pointindex+1] = color.g
+      @array[pointindex+2] = color.b
+    end
+
+    def set_point(x,y,r,g,b)
+      pointindex = (y*@width + x)*3
+      @array[pointindex] = r
+      @array[pointindex+1] = g
+      @array[pointindex+2] = b
     end
   end
 
