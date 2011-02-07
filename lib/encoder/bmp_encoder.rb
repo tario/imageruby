@@ -44,9 +44,8 @@ class BmpEncoder < Encoder
     height.times do |y|
 
       width.times do |x|
-        output << image.get_b(x,y)
-        output << image.get_g(x,y)
-        output << image.get_r(x,y)
+        index = (y*width+x)*3
+        output << image.pixel_data[index..index+2]
       end
 
       output << padding

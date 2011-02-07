@@ -36,9 +36,9 @@ module ImageRuby
     def [] (x,y)
       pointindex = (y*@width + x)*3
       Color.from_rgb(
-        @array[pointindex],
+        @array[pointindex+2],
         @array[pointindex+1],
-        @array[pointindex+2]
+        @array[pointindex]
         )
 
     end
@@ -46,36 +46,20 @@ module ImageRuby
     # set a color value for a image
     def []= (x,y,color)
       pointindex = (y*@width + x)*3
-      @array[pointindex] = color.r
+      @array[pointindex+2] = color.r
       @array[pointindex+1] = color.g
-      @array[pointindex+2] = color.b
+      @array[pointindex] = color.b
     end
 
     def set_point(x,y,r,g,b)
       pointindex = (y*@width + x)*3
-      @array[pointindex] = r
+      @array[pointindex+2] = r
       @array[pointindex+1] = g
-      @array[pointindex+2] = b
+      @array[pointindex] = b
     end
 
-    def get_r(x,y)
-      pointindex = (y*@width + x)*3
-      @array[pointindex]
-    end
-
-    def get_g(x,y)
-      pointindex = (y*@width + x)*3
-      @array[pointindex+1]
-    end
-
-    def get_b(x,y)
-      pointindex = (y*@width + x)*3
-      @array[pointindex+2]
-    end
-
-    def get_bgr(x,y)
-      pointindex = (y*@width + x)*3
-      @array[pointindex..pointindex+2]
+    def pixel_data
+      @array
     end
 
   end

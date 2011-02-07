@@ -49,13 +49,8 @@ class BmpDecoder < Decoder
     width.times do |x|
       height.times do |y|
         offset = pixeldata_offset+y*width_array_len+x*3
-        color_triplet = data[offset..offset+2]
-#        image[x,y] = Color.from_rgb(
- #           color_triplet[2],
-  #          color_triplet[1],
-   #         color_triplet[0]
-    #       )
-        image.set_point(x,y,color_triplet[2], color_triplet[1], color_triplet[0])
+        index = (y*width+x)*3
+        image.pixel_data[index..index+2] = data[offset..offset+2]
       end
     end
 
