@@ -33,7 +33,6 @@ class BmpDecoder < Decoder
     end
 
     pixeldata_offset = header[10..13].unpack("L").first
-    pixeldata_offset = 56
 
     width = dib_header[4..7].unpack("L").first
     height = dib_header[8..11].unpack("L").first
