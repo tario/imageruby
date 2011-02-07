@@ -42,14 +42,9 @@ class BmpEncoder < Encoder
 
     # write pixel data
     height.times do |y|
-
-      width.times do |x|
-        index = (y*width+x)*3
-        output << image.pixel_data[index..index+2]
-      end
-
+      index = (y*width)*3
+      output << image.pixel_data[index..index+width*3-1]
       output << padding
-
     end
   end
 
