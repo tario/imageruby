@@ -22,41 +22,36 @@ require "encoder"
 
 class BmpEncoder < Encoder
 
-  def encode(image, format)
+  def encode(image, format, output)
     unless format == :bmp
       raise UnableToEncodeException
     end
 
-    data = String.new
-
     width = image.width
     height = image.height
 
-    totalsize = 54 + width * height * 3
+    totalsize = 56 + width * height * 3
 
-    data << build_bmp_header(totalsize)
-    data << build_bmp_dib_header(image)
+    output << build_bmp_header(totalsize)
+    output << build_bmp_dib_header(image)
 
-    data << "\000\000" # for allignment
+    output << "\000\000" # for allignment
 
     padding_size = ( 4 - (width * 3 % 4) ) % 4
     padding =  "\000" * padding_size
 
     # write pixel data
     height.times do |y|
+
       width.times do |x|
-
-        color = image[x,y]
-        color_triplet = [color.b].pack("C") + [color.g].pack("C") + [color.r].pack("C")
-
-        data << color_triplet
+        output << image.get_b(x,y)
+        output << image.get_g(x,y)
+        output << image.get_r(x,y)
       end
 
-      data << padding
+      output << padding
 
     end
-
-    data
   end
 
 private

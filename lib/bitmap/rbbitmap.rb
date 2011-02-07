@@ -57,6 +57,27 @@ module ImageRuby
       @array[pointindex+1] = g
       @array[pointindex+2] = b
     end
+
+    def get_r(x,y)
+      pointindex = (y*@width + x)*3
+      @array[pointindex]
+    end
+
+    def get_g(x,y)
+      pointindex = (y*@width + x)*3
+      @array[pointindex+1]
+    end
+
+    def get_b(x,y)
+      pointindex = (y*@width + x)*3
+      @array[pointindex+2]
+    end
+
+    def get_bgr(x,y)
+      pointindex = (y*@width + x)*3
+      @array[pointindex..pointindex+2]
+    end
+
   end
 
   class RubyBitmap < Bitmap

@@ -27,12 +27,12 @@ class Encoder
 
   end
 
-  def self.encode(image,format)
+  def self.encode(image,format,output)
     Encoder.each_subclass do |sc|
       encoder = sc.new
 
       begin
-        return encoder.encode(image,format)
+        return encoder.encode(image,format,output)
       rescue UnableToEncodeException
 
       end

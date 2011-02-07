@@ -46,12 +46,14 @@ module ImageRuby
 
     def save(path, format)
       File.open(path, "wb") do |file|
-        file.write encode(format)
+        str = String.new
+        encode(format,str)
+        file.write str
       end
     end
 
-    def encode(format)
-      Encoder.encode(self,format)
+    def encode(format,output)
+      Encoder.encode(self,format,output)
     end
 
     def inspect()
