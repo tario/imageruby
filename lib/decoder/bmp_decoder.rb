@@ -47,8 +47,8 @@ class BmpDecoder < Decoder
 
     # read pixel data
     height.times do |y|
-      offset = pixeldata_offset+y*width_array_len
-      index = ((height-y-1)*width)*3
+      offset = pixeldata_offset+(height-y-1)*width_array_len
+      index = (y*width)*3
       image.pixel_data[index..index+width*3] = data[offset..offset+width*3]
     end
 
