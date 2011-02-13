@@ -31,6 +31,14 @@ module ImageRuby
 
     def initialize(width_, height_)
       initialize_bitmap_representation(width_, height_)
+
+      if block_given?
+        (0..width-1).each do |x_|
+          (0..height-1).each do |y_|
+            set_pixel(x_,y_, yield(x_,y_) )
+          end
+        end
+      end
     end
 
     # load a image from file
@@ -54,6 +62,21 @@ module ImageRuby
 
     def encode(format,output)
       Encoder.encode(self,format,output)
+    end
+
+    def [] (x,y)
+      if x.instance_of? Fixnum and y.instance_of? Fixnum
+        get_pixel(x,y)
+      else
+        x = (x..x) if x.instance_of? Fixnum
+        y = (y..y) if y.instance_of? Fixnum
+
+        newimg = Image.new(x.last + 1 - x.first, y.last + 1 - y.first) do |x_,y_|
+          get_pixel(x.first + x_, y.first + y_)
+        end
+
+        newimg
+      end
     end
 
     def inspect()
