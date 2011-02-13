@@ -83,6 +83,10 @@ module ImageRuby
       set_pixel(x,y,color)
     end
 
+    def on_chain
+      yield(self); self
+    end
+
     def inspect()
       "#<ImageRuby::Image:#{object_id} @width=#{@width}, @height=#{@height}>"
     end
