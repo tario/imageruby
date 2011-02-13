@@ -79,6 +79,10 @@ module ImageRuby
       end
     end
 
+    def []= (x,y,color)
+      set_pixel(x,y,color)
+    end
+
     def inspect()
       "#<ImageRuby::Image:#{object_id} @width=#{@width}, @height=#{@height}>"
     end
