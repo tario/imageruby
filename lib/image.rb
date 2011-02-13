@@ -33,8 +33,8 @@ module ImageRuby
       initialize_bitmap_representation(width_, height_)
 
       if block_given?
-        (0..width-1).each do |x_|
-          (0..height-1).each do |y_|
+        (0..width_-1).each do |x_|
+          (0..height_-1).each do |y_|
             set_pixel(x_,y_, yield(x_,y_) )
           end
         end

@@ -34,7 +34,7 @@ module ImageRuby
     end
     # return a Color object of a given x and y coord
     def get_pixel(x,y)
-      pointindex = (y*@width + x)*3
+      pointindex = ((height-1-y)*@width + x)*3
       Color.from_rgb(
         @array[pointindex+2],
         @array[pointindex+1],
@@ -45,7 +45,7 @@ module ImageRuby
 
     # set a color value for a image
     def set_pixel(x,y,color)
-      pointindex = (y*@width + x)*3
+      pointindex = ((height-1-y)*@width + x)*3
       @array[pointindex+2] = color.r
       @array[pointindex+1] = color.g
       @array[pointindex] = color.b
@@ -54,7 +54,7 @@ module ImageRuby
     end
 
     def set_point(x,y,r,g,b)
-      pointindex = (y*@width + x)*3
+      pointindex = ((height-1-y)*@width + x)*3
       @array[pointindex+2] = r
       @array[pointindex+1] = g
       @array[pointindex] = b
