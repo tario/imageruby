@@ -29,6 +29,11 @@ module ImageRuby
       attr_accessor :b
       attr_accessor :a
 
+      alias :red :r
+      alias :green :g
+      alias :blue :b
+      alias :alpha :a
+
       def self.from_rgb(r_,g_,b_)
         from_rgba(r_,g_,b_,255)
       end
