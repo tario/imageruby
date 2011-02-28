@@ -16,15 +16,7 @@ describe Image, "Image" do
   def self.test_create_and_black(width, height)
     it "should create images of #{width}x#{height} and should be black for all pixels" do
       image = Image.new(width,height)
-
-      (0..image.width-1).each do |x|
-        (0..image.height-1).each do |y|
-          c = image[x,y]
-          c.red.should be == 0
-          c.green.should be == 0
-          c.blue.should be == 0
-        end
-      end
+      image.pixel_data.should be == "\000"*width*height*3
     end
   end
 
