@@ -49,6 +49,10 @@ module ImageRuby
         c
       end
 
+      def ==(c)
+        (c.r == @r) and (c.g == @g) and (c.b == @b) and (c.a == @a)
+      end
+
       def self.coerce(color)
         unless color.instance_of? Color
           raise ArgumentException
