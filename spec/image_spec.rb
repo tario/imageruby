@@ -20,6 +20,11 @@ describe Image, "Image" do
     end
   end
 
+  def self.test_one_pixel(c)
+    image = Image.new(1,1) { |x,y| c }
+    image.get_pixel(x,y).should be == c
+  end
+
   test_create(10,10)
   test_create(0,0)
   test_create(640,480)
