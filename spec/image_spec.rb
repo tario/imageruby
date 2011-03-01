@@ -27,6 +27,25 @@ describe Image, "Image" do
     end
   end
 
+  def self.test_multiple_pixel
+    it "should create a image with specific pixels" do
+
+      data = Array.new
+
+      image = Image.new(10,10) do |x,y|
+        data[x*10+y] = Color.from_rgb(rand(255),rand(255),rand(255))
+        data[x*10+y]
+      end
+
+      (0..9).each do |x|
+         (0..9).each do |y|
+           image.get_pixel(x,y).should be == data[x*10+y]
+         end
+      end
+    end
+  end
+
+
   test_create(10,10)
   test_create(0,0)
   test_create(640,480)
@@ -45,6 +64,7 @@ describe Image, "Image" do
 
   10.times do
   test_one_pixel(Color.from_rgba(rand(255),rand(255),rand(255),rand(255)))
+  test_multiple_pixel
   end
 
 end
