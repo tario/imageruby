@@ -83,6 +83,14 @@ module ImageRuby
       set_pixel(x,y,color)
     end
 
+    def each_pixel
+      (0..@width-1).each do |x|
+        (0..@height-1).each do |y|
+          yield(x,y,get_pixel(x,y))
+        end
+      end
+    end
+
     def on_chain
       yield(self); self
     end
