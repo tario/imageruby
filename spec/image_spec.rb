@@ -21,8 +21,10 @@ describe Image, "Image" do
   end
 
   def self.test_one_pixel(c)
-    image = Image.new(1,1) { |x,y| c }
-    image.get_pixel(x,y).should be == c
+    it "should create a image of one pixel of color #{c.r}, #{c.g}, #{c.b}" do
+      image = Image.new(1,1) { |x,y| c }
+      image.get_pixel(0,0).should be == c
+    end
   end
 
   test_create(10,10)
@@ -36,5 +38,13 @@ describe Image, "Image" do
   test_create_and_black(640,480)
   test_create_and_black(1,100)
   test_create_and_black(20,67)
+
+  test_one_pixel(Color.from_rgba(0,0,0,255))
+  test_one_pixel(Color.from_rgba(255,255,255,255))
+  test_one_pixel(Color.from_rgba(255,255,255,128))
+
+  10.times do
+  test_one_pixel(Color.from_rgba(rand(255),rand(255),rand(255),rand(255)))
+  end
 
 end
