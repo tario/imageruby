@@ -91,6 +91,12 @@ module ImageRuby
       end
     end
 
+    def map_pixel
+      Image.new(@width, @height) do |x,y|
+        yield(x,y,get_pixel(x,y))
+      end
+    end
+
     def on_chain
       yield(self); self
     end
