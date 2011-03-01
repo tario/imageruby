@@ -34,30 +34,32 @@ module ImageRuby
     end
     # return a Color object of a given x and y coord
     def get_pixel(x,y)
-      pointindex = (y*@width + x)*3
-      Color.from_rgb(
+      index = (y*@width + x)
+      pointindex = index*3
+      Color.from_rgba(
         @array[pointindex+2],
         @array[pointindex+1],
-        @array[pointindex]
+        @array[pointindex],
+        @alpha ? @alpha[index] : 255
         )
 
     end
 
     # set a color value for a image
     def set_pixel(x,y,color)
-      pointindex = (y*@width + x)*3
+
+      index = (y*@width + x)
+      pointindex = index*3
       @array[pointindex+2] = color.r
       @array[pointindex+1] = color.g
       @array[pointindex] = color.b
 
-      self
-    end
+      if color.a != 255 then
+        @alpha = "\xff"*(@height * @width) unless @alpha
+        @alpha[index] = color.a
+      end
 
-    def set_point(x,y,r,g,b)
-      pointindex = (y*@width + x)*3
-      @array[pointindex+2] = r
-      @array[pointindex+1] = g
-      @array[pointindex] = b
+      self
     end
 
     def pixel_data
