@@ -61,6 +61,22 @@ describe Image, "Image" do
     end
   end
 
+  def self.rand_image(width, height)
+    Image.new(width, height) do
+      Color.from_rgb(rand(255),rand(255),rand(255))
+    end
+  end
+
+  def self.test_portion(width, height, x, y, part_width, part_height)
+    source_image = rand_image(width,height)
+    it "should extract a portion of size #{part_width}*#{part_height} with the [] operator" do
+      subimage = source_image[x..x+part_width-1, y..y+part_height-1]
+
+      subimage.each_pixel do |x_,y_,c|
+        source_image.get_pixel(x+x_, y+y_).should be == c
+      end
+    end
+  end
 
   test_create(10,10)
   test_create(0,0)
@@ -83,5 +99,10 @@ describe Image, "Image" do
   test_multiple_pixel
   test_multiple_pixel_each
   end
+
+  test_portion 1,1,0,0,1,1
+  test_portion 10,10,4,6,1,1
+  test_portion 10,10,0,0,4,5
+  test_portion 10,10,4,6,3,3
 
 end
