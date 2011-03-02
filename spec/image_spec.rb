@@ -78,6 +78,23 @@ describe Image, "Image" do
     end
   end
 
+  def self.test_portion_insertion(width, height, x, y, part_width, part_height)
+    source_image = rand_image(width,height)
+    identical = source_image.dup
+    insert_image = rand_image(part_width, part_height)
+    it "should extract a portion of size #{part_width}*#{part_height} with the [] operator" do
+      source_image[x..x+part_width-1, y..y+part_height-1] = insert_image
+
+      source_image.each_pixel do |x_,y_,c|
+        if x_ === (x..x+part_width-1) and y_ === (y..y+part_height-1) then
+          c.should be == insert_image.get_pixel(x_-x, y_-y)
+        else
+          c.should be == identical.get_pixel(x_, y_)
+        end
+      end
+    end
+  end
+
   test_create(10,10)
   test_create(0,0)
   test_create(640,480)
@@ -104,5 +121,10 @@ describe Image, "Image" do
   test_portion 10,10,4,6,1,1
   test_portion 10,10,0,0,4,5
   test_portion 10,10,4,6,3,3
+
+  test_portion_insertion 1,1,0,0,1,1
+  test_portion_insertion 10,10,4,6,1,1
+  test_portion_insertion 10,10,0,0,4,5
+  test_portion_insertion 10,10,4,6,3,3
 
 end
