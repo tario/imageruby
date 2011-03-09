@@ -113,9 +113,9 @@ module ImageRuby
 
         mask_str_color = "\xff\xff\xff"
         if mask_color
-          mask_str_color[0] = mask_color.g
-          mask_str_color[1] = mask_color.b
-          mask_str_color[2] = mask_color.b
+          mask_str_color[0] = mask_color.b
+          mask_str_color[1] = mask_color.g
+          mask_str_color[2] = mask_color.r
         end
 
         (0..image.height-1).each do |y_orig|
@@ -131,7 +131,7 @@ module ImageRuby
 
             color = orig_pixel_data[origpointer..origpointer+2]
 
-            if not mask_color or color != mask_str_color then
+            if color != mask_str_color then
               alpha = image.alpha_data[y_orig*image.width+x_orig]
               if alpha < 255
                 dest_pixel_data[destpointer] =
