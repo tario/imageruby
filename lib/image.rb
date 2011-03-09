@@ -94,6 +94,15 @@ module ImageRuby
       end
     end
 
+    def draw_with_mask(x,y,image)
+      white = Color.from_rgb(255,255,255)
+      image.each_pixel do |x_,y_,color|
+        if color != white then
+          set_pixel(x_+x,y_+y,color)
+        end
+      end
+    end
+
     def each_pixel
       (0..@width-1).each do |x|
         (0..@height-1).each do |y|
@@ -106,6 +115,14 @@ module ImageRuby
       Image.new(@width, @height) do |x,y|
         yield(x,y,get_pixel(x,y))
       end
+    end
+
+    def map_pixel!
+      each_pixel do |x,y,color|
+        set_pixel(x,y, yield(x,y,get_pixel(x,y)))
+      end
+
+      self
     end
 
     def on_chain
