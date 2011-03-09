@@ -94,11 +94,19 @@ module ImageRuby
       end
     end
 
-    def draw_with_mask(x,y,image)
-      white = Color.from_rgb(255,255,255)
-      image.each_pixel do |x_,y_,color|
-        if color != white then
-          set_pixel(x_+x,y_+y,color)
+    def draw(x,y,image,mask_color=nil)
+      if block_given?
+        image.each_pixel do |x_,y_,color|
+          next if yield(x_,y_,color)
+          if color != mask_color then
+            set_pixel(x_+x,y_+y,color)
+          end
+        end
+      else
+        image.each_pixel do |x_,y_,color|
+          if color != mask_color then
+            set_pixel(x_+x,y_+y,color)
+          end
         end
       end
     end
