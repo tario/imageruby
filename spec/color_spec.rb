@@ -43,5 +43,14 @@ describe Color, "color" do
     test_color_dup(c)
   end
 
+  def self.test_color_inequality(color1,color2)
+    it "color #{color1} and #{color2} should be diferent" do
+      (color1 == color2).should be false
+    end
+  end
+
+  test_color_inequality( Color.from_rgb(255,255,255), "str")
+  test_color_inequality( Color.from_rgb(255,255,255), 54)
+  test_color_inequality( Color.from_rgb(255,255,255), nil)
 
 end
