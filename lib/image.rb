@@ -95,20 +95,25 @@ module ImageRuby
     end
 
     def draw(x,y,image,mask_color=nil)
-      if block_given?
         image.each_pixel do |x_,y_,color|
-          next if yield(x_,y_,color)
+          if block_given?
+            next if yield(x_,y_,color)
+          end
           if color != mask_color then
-            set_pixel(x_+x,y_+y,color)
+
+            defcolor = color
+            if color.a < 255 then
+              origcolor = get_pixel(x+x_,y+y_)
+              defcolor = Color.from_rgb(
+                ( color.r*(color.a+1) + origcolor.r*(255-color.a) ) / 256,
+                ( color.g*(color.a+1) + origcolor.g*(255-color.a) ) / 256,
+                ( color.b*(color.a+1) + origcolor.b*(255-color.a) ) / 256
+                )
+            end
+
+            set_pixel(x_+x,y_+y,defcolor)
           end
         end
-      else
-        image.each_pixel do |x_,y_,color|
-          if color != mask_color then
-            set_pixel(x_+x,y_+y,color)
-          end
-        end
-      end
     end
 
     def each_pixel
