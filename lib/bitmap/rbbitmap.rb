@@ -66,6 +66,10 @@ module ImageRuby
       @array
     end
 
+    def alpha_data
+      @alpha
+    end
+
   end
 
   class RubyBitmap < Bitmap
