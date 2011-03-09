@@ -82,7 +82,7 @@ describe Image, "Image" do
     source_image = rand_image(width,height)
     identical = source_image.dup
     insert_image = rand_image(part_width, part_height)
-    it "should extract a portion of size #{part_width}*#{part_height} with the [] operator" do
+    it "should insert a portion of size #{part_width}*#{part_height} with the []= operator" do
       source_image[x..x+part_width-1, y..y+part_height-1] = insert_image
 
       source_image.each_pixel do |x_,y_,c|
