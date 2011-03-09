@@ -50,6 +50,8 @@ module ImageRuby
       end
 
       def ==(c)
+        return false unless c.instance_of? Color
+
         (c.r == @r) and (c.g == @g) and (c.b == @b) and (c.a == @a)
       end
 
