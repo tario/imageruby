@@ -71,8 +71,16 @@ module ImageRuby
         x = (x..x) if x.instance_of? Fixnum
         y = (y..y) if y.instance_of? Fixnum
 
-        newimg = Image.new(x.last + 1 - x.first, y.last + 1 - y.first) do |x_,y_|
-          get_pixel(x.first + x_, y.first + y_)
+        newimg = Image.new(x.last + 1 - x.first, y.last + 1 - y.first)
+
+        width = x.count
+        (0..y.count).each do |y_|
+
+          destpointer = y_*width*3
+          origpointer = ((y.first + y_)*self.width + x.first)*3
+
+          newimg.pixel_data[destpointer..destpointer+width*3] =
+            self.pixel_data[origpointer..origpointer+width*3]
         end
 
         newimg
