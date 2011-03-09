@@ -94,10 +94,14 @@ module ImageRuby
         x = (x..x) if x.instance_of? Fixnum
         y = (y..y) if y.instance_of? Fixnum
 
-        x.each do |x_|
-          y.each do |y_|
-            set_pixel(x_,y_, obj.get_pixel(x_ - x.first,y_ - y.first) )
-          end
+        width = x.count
+        (0..y.count).each do |y_|
+          origpointer = y_*width*3
+          destpointer = ((y.first + y_)*self.width + x.first)*3
+
+          self.pixel_data[destpointer..destpointer+width*3] =
+            obj.pixel_data[origpointer..origpointer+width*3]
+
         end
       end
     end
