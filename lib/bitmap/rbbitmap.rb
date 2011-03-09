@@ -45,6 +45,17 @@ module ImageRuby
 
     end
 
+    def initialize_dup(orig)
+      @alpha = orig.alpha_data.dup
+      @array = orig.pixel_data.dup
+      self
+    end
+
+    def dup
+      ret = super
+      ret.initialize_dup(self)
+    end
+
     # set a color value for a image
     def set_pixel(x,y,color)
 
