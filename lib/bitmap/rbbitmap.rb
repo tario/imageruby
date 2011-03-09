@@ -67,6 +67,7 @@ module ImageRuby
     end
 
     def alpha_data
+      @alpha = "\xff"*(@height * @width) unless @alpha
       @alpha
     end
 
