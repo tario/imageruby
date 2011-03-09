@@ -79,8 +79,19 @@ module ImageRuby
       end
     end
 
-    def []= (x,y,color)
-      set_pixel(x,y,color)
+    def []= (x,y,obj)
+      if x.instance_of? Fixnum and y.instance_of? Fixnum
+        set_pixel(x,y,obj)
+      else
+        x = (x..x) if x.instance_of? Fixnum
+        y = (y..y) if y.instance_of? Fixnum
+
+        x.each do |x_|
+          y.each do |y_|
+            set_pixel(x_,y_, obj.get_pixel(x_ - x.first,y_ - y.first) )
+          end
+        end
+      end
     end
 
     def each_pixel
