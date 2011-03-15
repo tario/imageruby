@@ -86,7 +86,7 @@ describe Image, "Image" do
       source_image[x..x+part_width-1, y..y+part_height-1] = insert_image
 
       source_image.each_pixel do |x_,y_,c|
-        if x_ === (x..x+part_width-1) and y_ === (y..y+part_height-1) then
+        if (x..x+part_width-1) === x_ and (y..y+part_height-1) === y_ then
           c.should be == insert_image.get_pixel(x_-x, y_-y)
         else
           c.should be == identical.get_pixel(x_, y_)
