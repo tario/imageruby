@@ -95,6 +95,19 @@ describe Image, "Image" do
     end
   end
 
+  def self.test_dup(width,height)
+    source_image = rand_image(width,height)
+
+    it "should dup image of size #{width}*#{height} and the dupped should be identical pixel to pixel" do
+
+      dupped_image = source_image.dup
+
+      source_image.each_pixel do |x_,y_,c|
+        c.should be == dupped_image.get_pixel(x_, y_)
+      end
+    end
+  end
+
   test_create(10,10)
   test_create(0,0)
   test_create(640,480)
@@ -127,4 +140,7 @@ describe Image, "Image" do
   test_portion_insertion 10,10,0,0,4,5
   test_portion_insertion 10,10,4,6,3,3
 
+  10.times do |x|
+    test_dup(x+1,x+1)
+  end
 end
