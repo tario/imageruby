@@ -40,7 +40,7 @@ class BmpDecoder < Decoder
 
     # create image object
 
-    image = Image.new(width,height)
+    image = ImageRuby::Image.new(width,height)
 
     padding_size = ( 4 - (width * 3 % 4) ) % 4
     width_array_len = width*3 + padding_size

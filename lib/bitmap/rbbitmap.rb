@@ -30,7 +30,7 @@ module ImageRuby
     def initialize_bitmap_representation(width_, height_)
       @width = width_
       @height = height_
-      @array = "\000"*@width*@height*3
+      @array = "\xff\xff\xff"*@width*@height
     end
     # return a Color object of a given x and y coord
     def get_pixel(x,y)
