@@ -95,12 +95,12 @@ module ImageRuby
         y = (y..y) if y.instance_of? Fixnum
 
         width = x.count
-        (0..y.count).each do |y_|
-          origpointer = y_*width*3
+        (0..y.count-1).each do |y_|
+          origpointer = y_*obj.width*3
           destpointer = ((y.first + y_)*self.width + x.first)*3
 
-          self.pixel_data[destpointer..destpointer+width*3] =
-            obj.pixel_data[origpointer..origpointer+width*3]
+          self.pixel_data[destpointer..destpointer+obj.width*3-1] =
+            obj.pixel_data[origpointer..origpointer+obj.width*3-1]
 
         end
       end
