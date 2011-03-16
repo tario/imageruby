@@ -63,4 +63,8 @@ module ImageRuby
         color
       end
     end
+
+    def to_s
+      b.chr + g.chr + r.chr
+    end
 end
