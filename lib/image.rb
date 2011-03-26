@@ -187,6 +187,28 @@ module ImageRuby
       self
     end
 
+    def color_replace(color1, color2)
+
+      newimage = self.dup
+      newimage.color_replace!(color1,color2)
+      newimage
+    end
+
+    def color_replace!( color1, color2)
+
+      strcolor1 = str_color color1
+      strcolor2 = str_color color2
+
+      a = color2.a
+
+      (0..width*height).each do |i|
+        if pixel_data[i*3..i*3+2] == strcolor1 then
+          pixel_data[i*3..i*3+2] = strcolor2
+          alpha_data[i] = a
+        end
+      end
+    end
+
     def on_chain
       yield(self); self
     end
