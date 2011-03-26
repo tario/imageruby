@@ -29,8 +29,8 @@ module ImageRuby
   class Image
     include Bitmap.bitmap_representation
 
-    def initialize(width_, height_)
-      initialize_bitmap_representation(width_, height_)
+    def initialize(width_, height_, color = nil)
+      initialize_bitmap_representation(width_, height_, color)
 
       if block_given?
         (0..width_-1).each do |x_|

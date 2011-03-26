@@ -27,10 +27,13 @@ module ImageRuby
     attr_reader :width
     attr_reader :height
 
-    def initialize_bitmap_representation(width_, height_)
+    def initialize_bitmap_representation(width_, height_, color = nil)
+
+      color ||= Color.from_rgb(0,0,0)
+
       @width = width_
       @height = height_
-      @array = "\x00\x00\x00"*@width*@height
+      @array = color.to_s*@width*@height
     end
     # return a Color object of a given x and y coord
     def get_pixel(x,y)
