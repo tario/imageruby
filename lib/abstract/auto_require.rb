@@ -18,9 +18,13 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/image"
-require "lib/decoder"
-require "lib/abstract/auto_require"
-auto_require /^imageruby-/
+require "rubygems"
 
+def auto_require(prefix)
+  Gem.source_index.each do |entry|
+    if entry[0] =~ prefix
+      require entry[1].name
+    end
+  end
+end
 
