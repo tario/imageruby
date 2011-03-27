@@ -21,6 +21,6 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 require "lib/image"
 require "lib/decoder"
 require "lib/abstract/auto_require"
-auto_require /^imageruby-/
+auto_require(/^imageruby-/)
 
 
