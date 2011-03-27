@@ -23,17 +23,6 @@ require "lib/bitmap"
 module ImageRuby
   module PureRubyImageMethods
 
-    # load a image from file
-    def self.from_file(path)
-
-      decoded = nil
-      File.open(path,"rb") do |file|
-        decoded = Decoder.decode(file.read)
-      end
-
-      decoded
-    end
-
     def save(path, format)
       File.open(path, "wb") do |file|
         str = String.new

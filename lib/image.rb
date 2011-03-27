@@ -19,6 +19,7 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
 require "lib/encoder"
+require "lib/decoder"
 require "lib/bitmap"
 require "lib/bitmap/rbbitmap"
 require "lib/baseimage"
@@ -45,6 +46,17 @@ module ImageRuby
 
     def encode(format,output)
       Encoder.encode(self,format,output)
+    end
+
+    # load a image from file
+    def self.from_file(path)
+
+      decoded = nil
+      File.open(path,"rb") do |file|
+        decoded = Decoder.decode(file.read)
+      end
+
+      decoded
     end
 
   end
