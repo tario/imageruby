@@ -92,27 +92,33 @@ module ImageRuby
             color = orig_pixel_data[origpointer..origpointer+2]
 
               alpha = image.alpha_data[y_orig*image.width+x_orig]
-              if alpha < 255
-                dest_pixel_data[destpointer] =
-                  ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
-                  origpointer = origpointer + 1
-                  destpointer = destpointer + 1
 
-                dest_pixel_data[destpointer] =
-                  ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
-                  origpointer = origpointer + 1
-                  destpointer = destpointer + 1
+                if alpha < 255
+                  if alpha > 0
+                    dest_pixel_data[destpointer] =
+                      ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
+                      origpointer = origpointer + 1
+                      destpointer = destpointer + 1
 
-                dest_pixel_data[destpointer] =
-                  ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
-                  origpointer = origpointer + 1
-                  destpointer = destpointer + 1
+                    dest_pixel_data[destpointer] =
+                      ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
+                      origpointer = origpointer + 1
+                      destpointer = destpointer + 1
 
-              else
-                dest_pixel_data[destpointer..destpointer+2] = color
-                destpointer = destpointer + 3
-                origpointer = origpointer + 3
-              end
+                    dest_pixel_data[destpointer] =
+                      ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
+                      origpointer = origpointer + 1
+                      destpointer = destpointer + 1
+
+                  else
+                    destpointer = destpointer + 3
+                    origpointer = origpointer + 3
+                  end
+                else
+                  dest_pixel_data[destpointer..destpointer+2] = color
+                  destpointer = destpointer + 3
+                  origpointer = origpointer + 3
+                end
           end
         end
     end
