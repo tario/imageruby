@@ -73,15 +73,7 @@ module ImageRuby
       end
     end
 
-    def draw(x,y,image,mask_color=nil)
-      if mask_color
-        draw_with_mask(x,y,image,mask_color)
-      else
-        draw_without_mask(x,y,image)
-      end
-    end
-
-    def draw_without_mask(x,y,image)
+    def draw(x,y,image)
 
         dest_pixel_data = self.pixel_data
         orig_pixel_data = image.pixel_data
@@ -125,63 +117,6 @@ module ImageRuby
         end
     end
 
-    def draw_with_mask(x,y,image,mask_color)
-
-        dest_pixel_data = self.pixel_data
-        orig_pixel_data = image.pixel_data
-
-        mask_str_color = "___"
-
-        mask_str_color[0] = mask_color.b
-        mask_str_color[1] = mask_color.g
-        mask_str_color[2] = mask_color.r
-
-        (0..image.height-1).each do |y_orig|
-          y_dest = y_orig + y
-
-          origpointer = y_orig*image.width*3
-          destpointer = (y_dest*width+x)*3
-
-          (0..image.width-1).each do |x_orig|
-            if block_given?
-              next if yield(x_orig,y_orig, Color.from_rgb(255,255,255))
-            end
-
-            color = orig_pixel_data[origpointer..origpointer+2]
-
-            if color != mask_str_color then
-              alpha = image.alpha_data[y_orig*image.width+x_orig]
-              if alpha < 255
-                dest_pixel_data[destpointer] =
-                  ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
-                  origpointer = origpointer + 1
-                  destpointer = destpointer + 1
-
-                dest_pixel_data[destpointer] =
-                  ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
-                  origpointer = origpointer + 1
-                  destpointer = destpointer + 1
-
-                dest_pixel_data[destpointer] =
-                  ( orig_pixel_data[origpointer]*(alpha+1) + dest_pixel_data[destpointer]*(255-alpha) ) / 256
-                  origpointer = origpointer + 1
-                  destpointer = destpointer + 1
-
-              else
-                dest_pixel_data[destpointer..destpointer+2] = color
-                destpointer = destpointer + 3
-                origpointer = origpointer + 3
-              end
-            else
-              destpointer = destpointer + 3
-              origpointer = origpointer + 3
-            end
-
-          end
-
-        end
-
-    end
 
     def each_pixel
       (0..@width-1).each do |x|
@@ -214,8 +149,8 @@ module ImageRuby
 
     def color_replace!( color1, color2)
 
-      strcolor1 = str_color color1
-      strcolor2 = str_color color2
+      strcolor1 = color1.to_s
+      strcolor2 = color2.to_s
 
       a = color2.a
 
@@ -225,6 +160,14 @@ module ImageRuby
           alpha_data[i] = a
         end
       end
+    end
+
+    def mask(color1 = nil)
+      color1 = color1 || Color.from_rgb(255,255,255)
+      color2 = color1.dup
+      color2.a = 0
+
+      color_replace(color1,color2)
     end
 
     def on_chain
