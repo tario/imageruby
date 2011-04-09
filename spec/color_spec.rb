@@ -69,4 +69,16 @@ describe Color, "color" do
                   "teal" => [0, 0x80, 0x80], "navy" => [0,0,0x80], "fuchsia" => [0xff,0x00,0xff],
                   "purple" => [0x80,0,0x80]
 
+  # web format
+
+
+  def self.test_web_format(str, value)
+    it "color code '#{str}' should be color #{value.inspect}" do
+    Color.coerce(str).should be == Color.coerce(value)
+    end
+  end
+
+  test_web_format("#000000", [0,0,0])
+  test_web_format("#000", [0,0,0])
+
 end
