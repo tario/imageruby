@@ -19,7 +19,19 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
 module ImageRuby
+
     class Color
+      def self.add_color_name(color_name, value)
+        eval("@#{color_name} = Color.coerce(#{value.inspect})")
+        eval("def self.#{color_name}; @#{color_name}; end")
+      end
+
+      def self.define_colors(hash)
+        hash.each do |k,v|
+          add_color_name(k,v)
+        end
+      end
+
       class ArgumentException < Exception
 
       end
@@ -59,11 +71,13 @@ module ImageRuby
         if arg.instance_of? Color
           return arg
         elsif arg.instance_of? Array
-          Color.from_rgba(*arg)
+          Color.from_rgba(arg[0],arg[1],arg[2],arg[3] || 255)
         else
           raise ArgumentException
         end
       end
+
+      define_colors :red => [255,0,0], :green => [0,255,0] , :blue => [0,0,255]
     end
 
     def to_s
