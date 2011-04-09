@@ -45,12 +45,20 @@ describe Color, "color" do
 
   def self.test_color_inequality(color1,color2)
     it "color #{color1} and #{color2} should be diferent" do
-      (color1 == color2).should be false
+      (color1 == color2).should be == false
+    end
+  end
+
+  def self.test_color_name(color_name, color_array)
+    it "color of name '#{color_name}' should be #{color_array.inspect}" do
+    Color.send(color_name).should be == Color.coerce(color_array)
     end
   end
 
   test_color_inequality( Color.from_rgb(255,255,255), "str")
   test_color_inequality( Color.from_rgb(255,255,255), 54)
   test_color_inequality( Color.from_rgb(255,255,255), nil)
+
+  test_color_name "red", [255,0,0]
 
 end
