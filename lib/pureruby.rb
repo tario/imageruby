@@ -18,7 +18,7 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/bitmap"
+require "bitmap"
 
 module ImageRuby
   module PureRubyImageMethods
@@ -154,7 +154,6 @@ module ImageRuby
     end
 
     def color_replace!( color1, color2)
-
       strcolor1 = color1.to_s
       strcolor2 = color2.to_s
 

@@ -18,8 +18,8 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "lib/bitmap"
-require "lib/bitmap/rbbitmap"
+require "bitmap"
+require "bitmap/rbbitmap"
 
 module ImageRuby
 
