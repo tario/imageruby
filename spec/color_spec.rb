@@ -60,5 +60,7 @@ describe Color, "color" do
   test_color_inequality( Color.from_rgb(255,255,255), nil)
 
   test_color_name "red", [255,0,0]
+  test_color_name "green", [0,255,0]
+  test_color_name "blue", [0,0,255]
 
 end
