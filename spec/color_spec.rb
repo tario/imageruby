@@ -49,9 +49,11 @@ describe Color, "color" do
     end
   end
 
-  def self.test_color_name(color_name, color_array)
-    it "color of name '#{color_name}' should be #{color_array.inspect}" do
-    Color.send(color_name).should be == Color.coerce(color_array)
+  def self.test_color_name(hash)
+    hash.each do |color_name,color_array|
+      it "color of name '#{color_name}' should be #{color_array.inspect}" do
+      Color.send(color_name).should be == Color.coerce(color_array)
+      end
     end
   end
 
@@ -59,8 +61,7 @@ describe Color, "color" do
   test_color_inequality( Color.from_rgb(255,255,255), 54)
   test_color_inequality( Color.from_rgb(255,255,255), nil)
 
-  test_color_name "red", [255,0,0]
-  test_color_name "green", [0,255,0]
-  test_color_name "blue", [0,0,255]
+
+  test_color_name "red" => [255,0,0], "green" => [0,255,0], "blue" => [0,0,255]
 
 end
