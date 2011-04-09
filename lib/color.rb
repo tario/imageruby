@@ -55,12 +55,14 @@ module ImageRuby
         (c.r == @r) and (c.g == @g) and (c.b == @b) and (c.a == @a)
       end
 
-      def self.coerce(color)
-        unless color.instance_of? Color
+      def self.coerce(arg)
+        if arg.instance_of? Color
+          return arg
+        elsif arg.instance_of? Array
+          Color.from_rgba(*arg)
+        else
           raise ArgumentException
         end
-
-        color
       end
     end
 
