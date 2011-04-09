@@ -62,6 +62,11 @@ describe Color, "color" do
   test_color_inequality( Color.from_rgb(255,255,255), nil)
 
 
-  test_color_name "red" => [255,0,0], "green" => [0,255,0], "blue" => [0,0,255]
+  test_color_name "red" => [255,0,0], "green" => [0,255,0], "blue" => [0,0,255],
+                  "white" => [255,255,255], "silver" => [0xc0, 0xc0, 0xc0], "gray" => [0x80,0x80,0x80],
+                  "black" => [0,0,0], "maroon" => [0x80,0,0], "yellow" => [0xff,0xff,0],
+                  "olive" => [0x80,0x80,0], "lime" => [0,0xff,0], "aqua" => [0, 0xff, 0xff],
+                  "teal" => [0, 0x80, 0x80], "navy" => [0,0,0x80], "fuchsia" => [0xff,0x00,0xff],
+                  "purple" => [0x80,0,0x80]
 
 end
