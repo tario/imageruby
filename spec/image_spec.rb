@@ -43,7 +43,28 @@ describe Image, "Image" do
          end
       end
     end
+
+    test_negative_multiple_pixel
   end
+
+  def self.test_negative_multiple_pixel
+    it "should create a image with specific pixels" do
+
+      data = Array.new
+
+      image = Image.new(10,10) do |x,y|
+        data[x*10+y] = Color.from_rgb(rand(255),rand(255),rand(255))
+        data[x*10+y]
+      end
+
+      (-10..-1).each do |x|
+         (-10..-1).each do |y|
+           image.get_pixel(x,y).should be == data[(x+10)*10+(y+10)]
+         end
+      end
+    end
+  end
+
 
   def self.test_multiple_pixel_each
     it "should create a image with specific pixels" do
