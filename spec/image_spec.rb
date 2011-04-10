@@ -59,7 +59,7 @@ describe Image, "Image" do
 
       (-10..-1).each do |x|
          (-10..-1).each do |y|
-           image.get_pixel(x,y).should be == data[(x+10)*10+(y+10)]
+           image[x,y].should be == data[(x+10)*10+(y+10)]
          end
       end
     end
