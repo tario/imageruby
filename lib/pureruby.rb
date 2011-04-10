@@ -42,7 +42,7 @@ public
 
     def [] (x,y)
       if x.instance_of? Fixnum and y.instance_of? Fixnum
-        get_pixel(x,y)
+        get_pixel(fixx(x),fixy(y))
       else
         x = (fixx(x)..fixx(x)) if x.instance_of? Fixnum
         y = (fixy(y)..fixy(y)) if y.instance_of? Fixnum
