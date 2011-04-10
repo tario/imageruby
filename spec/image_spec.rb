@@ -78,6 +78,21 @@ describe Image, "Image" do
     end
   end
 
+  def self.test_negative_portion(width, height, x, y, part_width, part_height)
+    source_image = rand_image(width,height)
+
+    xrange = x..x+part_width-1-source_image.width
+    yrange = y..y+part_height-1-source_image.height
+
+    it "should extract a portion with negative ranges [#{xrange},#{yrange}] with the [] operator" do
+      subimage = source_image[xrange, yrange]
+
+      subimage.each_pixel do |x_,y_,c|
+        source_image.get_pixel(x+x_, y+y_).should be == c
+      end
+    end
+  end
+
   def self.test_portion_insertion(width, height, x, y, part_width, part_height)
     source_image = rand_image(width,height)
     identical = source_image.dup
@@ -134,6 +149,11 @@ describe Image, "Image" do
   test_portion 10,10,4,6,1,1
   test_portion 10,10,0,0,4,5
   test_portion 10,10,4,6,3,3
+
+  test_negative_portion 1,1,0,0,1,1
+  test_negative_portion 10,10,4,6,1,1
+  test_negative_portion 10,10,0,0,4,5
+  test_negative_portion 10,10,4,6,3,3
 
   test_portion_insertion 1,1,0,0,1,1
   test_portion_insertion 10,10,4,6,1,1
