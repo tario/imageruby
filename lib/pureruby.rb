@@ -31,12 +31,29 @@ module ImageRuby
       end
     end
 
+private
+    def fixx(x)
+      x - (x / width) * width
+    end
+    def fixy(y)
+      y - (y / height) * height
+    end
+public
+
     def [] (x,y)
       if x.instance_of? Fixnum and y.instance_of? Fixnum
         get_pixel(x,y)
       else
-        x = (x..x) if x.instance_of? Fixnum
-        y = (y..y) if y.instance_of? Fixnum
+        x = (fixx(x)..fixx(x)) if x.instance_of? Fixnum
+        y = (fixy(y)..fixy(y)) if y.instance_of? Fixnum
+
+        if x.instance_of? Range
+          x = (fixx(x.first)..fixx(x.last))
+        end
+
+        if y.instance_of? Range
+          y = (fixy(y.first)..fixy(y.last))
+        end
 
         newimg = Image.new(x.last + 1 - x.first, y.last + 1 - y.first)
 
