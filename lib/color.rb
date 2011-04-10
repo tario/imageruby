@@ -72,6 +72,14 @@ module ImageRuby
           return arg
         elsif arg.instance_of? Array
           Color.from_rgba(arg[0],arg[1],arg[2],arg[3] || 255)
+        elsif arg.instance_of? String
+          if arg.size == 4
+            Color.from_rgb((arg[1..1]*2).to_i(16),(arg[2..2]*2).to_i(16),(arg[3..3]*2).to_i(16) )
+          elsif arg.size == 7
+            Color.from_rgb((arg[1..2]).to_i(16),(arg[3..4]).to_i(16),(arg[5..6]*2).to_i(16) )
+          else
+            raise ArgumentException
+          end
         else
           raise ArgumentException
         end
