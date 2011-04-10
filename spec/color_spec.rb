@@ -78,7 +78,20 @@ describe Color, "color" do
     end
   end
 
-  test_web_format("#000000", [0,0,0])
-  test_web_format("#000", [0,0,0])
+  test_web_format("\#000000", [0,0,0])
+  test_web_format("\#000", [0,0,0])
 
+  (17..255).each do |x|
+    test_web_format("\##{x.to_s(16)}0000", [x,0,0])
+  end
+  (0..15).each do |x|
+    test_web_format("\##{x.to_s(16)}00", [x + x*0x10,0,0])
+  end
+
+  32.times do
+    r = rand(235)+17
+    g = rand(235)+17
+    b = rand(235)+17
+    test_web_format("\##{r.to_s(16)}#{g.to_s(16)}#{b.to_s(16)}", [r,g,b])
+  end
 end
