@@ -69,7 +69,7 @@ describe Image, "Image" do
 
   def self.test_portion(width, height, x, y, part_width, part_height)
     source_image = rand_image(width,height)
-    it "should extract a portion of size #{part_width}*#{part_height} with the [] operator" do
+    it "should extract a portion [#{x..x+part_width-1},#{y..y+part_height-1}] with the [] operator" do
       subimage = source_image[x..x+part_width-1, y..y+part_height-1]
 
       subimage.each_pixel do |x_,y_,c|
