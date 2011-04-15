@@ -18,16 +18,16 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "baseimage"
+require "image/baseimage"
 
 # extensions
-require "pureruby"
+require "image/pureruby"
 require "abstract/auto_require"
 auto_require(/^imageruby-/)
 require "decoder/bmp_decoder"
 require "encoder/bmp_encoder"
 
-require "image"
+require "image/image"
 require "decoder"
 
 

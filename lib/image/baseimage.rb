@@ -18,47 +18,27 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "encoder"
-require "decoder"
-require "bitmap"
+require "bitmap/bitmap"
 require "bitmap/rbbitmap"
-require "baseimage"
 
 module ImageRuby
 
-  class Image < BaseImage
+  class << self
+    attr_accessor :image_mixin
 
-    ImageRuby.image_mixin.each do |modl|
-      include modl
+    def image_mixin
+      @image_mixin ||= Array.new
+      @image_mixin
     end
-
-    def initialize(width_, height_, color = nil)
-      initialize_bitmap_representation(width_, height_, color)
-
-      if block_given?
-        (0..width_-1).each do |x_|
-          (0..height_-1).each do |y_|
-            set_pixel(x_,y_, yield(x_,y_) )
-          end
-        end
-      end
-    end
-
-    def encode(format,output)
-      Encoder.encode(self,format,output)
-    end
-
-    # load a image from file
-    def self.from_file(path)
-
-      decoded = nil
-      File.open(path,"rb") do |file|
-        decoded = Decoder.decode(file.read)
-      end
-
-      decoded
-    end
-
   end
+
+  def self.register_image_mixin(modl)
+    ImageRuby.image_mixin << modl
+  end
+
+  class BaseImage
+    include Bitmap.bitmap_representation
+  end
+
 end
 
