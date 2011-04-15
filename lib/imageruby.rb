@@ -28,6 +28,6 @@ require "decoder/bmp_decoder"
 require "encoder/bmp_encoder"
 
 require "image/image"
-require "decoder"
+require "image/decoder"
 
 
