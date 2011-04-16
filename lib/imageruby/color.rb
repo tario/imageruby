@@ -26,6 +26,10 @@ module ImageRuby
         eval("def self.#{color_name}; @#{color_name}; end")
       end
 
+      def self.named_colors
+
+      end
+
       def self.define_colors(hash)
         hash.each do |k,v|
           add_color_name(k,v)
