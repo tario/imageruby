@@ -80,10 +80,6 @@ module ImageRuby
       @array
     end
 
-    def alpha_data=(al)
-      @alpha = al
-    end
-
     def alpha_data
       @alpha = "\xff"*(@height * @width) unless @alpha
       @alpha
