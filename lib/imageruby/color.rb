@@ -21,6 +21,12 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 module ImageRuby
 
     class Color
+      # Add a new named Color
+      # Example:
+      #
+      #   Color.add_color_name("turquoise", "#30d5c8")
+      #   Color.turqoise # returns recently added named color
+
       def self.add_color_name(color_name, value)
         color = Color.coerce(value)
         eval("@#{color_name} = color")
@@ -30,10 +36,16 @@ module ImageRuby
         @color_hash[color_name] = color
       end
 
+      # return the list of named colors
+      #
+      #   Color.named_colors.each do |name, color|
+      #     print "color '#{name}' = #{color.inspect}\n"
+      #   end
       def self.named_colors
         @color_hash
       end
 
+      # method for internal use
       def self.define_colors(hash)
         hash.each do |k,v|
           add_color_name(k,v)
@@ -44,9 +56,13 @@ module ImageRuby
 
       end
 
+      # red channel (between 0 and 255)
       attr_accessor :r
+      # green channel (between 0 and 255)
       attr_accessor :g
+      # blue channel (between 0 and 255)
       attr_accessor :b
+      # alpha channel (between 0 and 255)
       attr_accessor :a
 
       alias :red :r
@@ -54,9 +70,19 @@ module ImageRuby
       alias :blue :b
       alias :alpha :a
 
+      # Create a color from given red, green and blue values (between 0 and 255)
+      #
+      # Example:
+      #   white = Color.from_rgb(255,255,255)
+
       def self.from_rgb(r_,g_,b_)
         from_rgba(r_,g_,b_,255)
       end
+
+      # Create a color from given red, green, blue and alpha. values (between 0 and 255)
+      #
+      # Example:
+      #   white = Color.from_rgba(255,255,255,128)
 
       def self.from_rgba(r_,g_,b_,a_)
 
@@ -69,11 +95,22 @@ module ImageRuby
         c
       end
 
+      # Compares two colors channel by channel (including alpha)
       def ==(c)
         return false unless c.instance_of? Color
 
         (c.r == @r) and (c.g == @g) and (c.b == @b) and (c.a == @a)
       end
+
+      # Coerce color to convert Array with rgba values, String with hexadecimal web color code, or a Color
+      # to a instance of color
+      #
+      # Examples:
+      #   Color.coerce([255,0,0]) # returns #<ImageRuby::Color:0x7f48b0051040 @r=255, @a=255, @b=0, @g=0>
+      #   Color.coerce("#FF0000") # returns #<ImageRuby::Color:0x7f48b0051040 @r=255, @a=255, @b=0, @g=0>
+      #   Color.coerce("#F00" ) # returns #<ImageRuby::Color:0x7f48b0051040 @r=255, @a=255, @b=0, @g=0>
+      #   Color.coerce(Color.red) # returns #<ImageRuby::Color:0x7f48b0051040 @r=255, @a=255, @b=0, @g=0>
+      #
 
       def self.coerce(arg)
         if arg.instance_of? Color
