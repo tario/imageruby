@@ -18,11 +18,11 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "image/encoder"
-require "image/decoder"
-require "bitmap/bitmap"
-require "bitmap/rbbitmap"
-require "image/baseimage"
+require "imageruby/encoder"
+require "imageruby/decoder"
+require "imageruby/bitmap/bitmap"
+require "imageruby/bitmap/rbbitmap"
+require "imageruby/baseimage"
 
 module ImageRuby
 
