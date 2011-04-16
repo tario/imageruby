@@ -20,9 +20,6 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 =end
 module RubyImage
   module SubclassEnumerator
-    def each_subclass
-    end
-
     def inherited(b)
       @sub_classes = @sub_classes || Array.new
       @sub_classes << b
