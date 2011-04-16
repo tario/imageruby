@@ -22,12 +22,16 @@ module ImageRuby
 
     class Color
       def self.add_color_name(color_name, value)
-        eval("@#{color_name} = Color.coerce(#{value.inspect})")
+        color = Color.coerce(value)
+        eval("@#{color_name} = color")
         eval("def self.#{color_name}; @#{color_name}; end")
+
+        @color_hash ||= Hash.new
+        @color_hash[color_name] = color
       end
 
       def self.named_colors
-
+        @color_hash
       end
 
       def self.define_colors(hash)
