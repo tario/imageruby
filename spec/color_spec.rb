@@ -69,6 +69,9 @@ describe Color, "color" do
                   "teal" => [0, 0x80, 0x80], "navy" => [0,0,0x80], "fuchsia" => [0xff,0x00,0xff],
                   "purple" => [0x80,0,0x80], "orange" => [0xff, 0xa5, 0]
 
+  it "should return named_colors" do
+    Color.named_colors
+  end
   # web format
 
 
