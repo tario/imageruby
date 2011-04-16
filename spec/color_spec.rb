@@ -65,7 +65,7 @@ describe Color, "color" do
           end
         end
 
-        named_color.should be != nil
+        named_color.should_not be == nil
       end
 
     end
