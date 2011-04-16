@@ -29,10 +29,10 @@ module ImageRuby
     end
 
     # encode a image with the given format writing the binary data to the output
-    # output can be a string or a open file
+    # output can be a string or a open file on binary mode
     # raises UnableToEncodeException if the specified format is unknown
     #
-    # To save a file to disk use the method save of the image class
+    # To save a image to a file on disk use the method Image#save
     #
     # Example
     #

@@ -44,6 +44,10 @@ module ImageRuby
       end
     end
 
+    # encodes the image with the specific format writting the result to output
+    # output can be a string or a open file on binary mode
+    #
+    # To save a image to a file on disk use the method Image#save
     def encode(format,output)
       Encoder.encode(self,format,output)
     end
