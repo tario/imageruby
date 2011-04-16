@@ -83,6 +83,11 @@ module ImageRuby
         @r = value
       end
 
+      def a=(value)
+        raise OutOfRangeException if value<0 or value>255
+        @a = value
+      end
+
       # Create a color from given red, green and blue values (between 0 and 255)
       #
       # Example:
