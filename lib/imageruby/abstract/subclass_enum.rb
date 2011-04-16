@@ -20,10 +20,20 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 =end
 module RubyImage
   module SubclassEnumerator
+    # used internally. you should not call this method explicitly
     def inherited(b)
       @sub_classes = @sub_classes || Array.new
       @sub_classes << b
     end
+
+    # enumerate the subclasses of the class
+    #
+    # Example:
+    #
+    #   print "available decoders:\n"
+    #   Decoder.each_subclass do |decoder_class|
+    #     p decoder_class
+    #   end
 
     def each_subclass
       @sub_classes.to_a.each do |sc|
@@ -35,6 +45,14 @@ end
 
 class Object
 
+  # Add mixin including each_subclass to the class (used on Encoder and Decoder class)
+  #
+  # Example
+  #
+  #   class Decoder
+  #     with_enumerable_subclasses
+  #     ...
+  #   end
   def self.with_enumerable_subclasses
     class << self
       include RubyImage::SubclassEnumerator
