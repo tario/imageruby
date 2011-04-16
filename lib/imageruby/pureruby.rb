@@ -108,10 +108,6 @@ public
           destpointer = (y_dest*width+x)*3
 
           (0..image.width-1).each do |x_orig|
-            if block_given?
-              next if yield(x_orig,y_orig, Color.from_rgb(255,255,255))
-            end
-
             color = orig_pixel_data[origpointer..origpointer+2]
 
               alpha = image.alpha_data[y_orig*image.width+x_orig]
