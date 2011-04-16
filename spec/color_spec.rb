@@ -67,7 +67,7 @@ describe Color, "color" do
                   "black" => [0,0,0], "maroon" => [0x80,0,0], "yellow" => [0xff,0xff,0],
                   "olive" => [0x80,0x80,0], "lime" => [0,0xff,0], "aqua" => [0, 0xff, 0xff],
                   "teal" => [0, 0x80, 0x80], "navy" => [0,0,0x80], "fuchsia" => [0xff,0x00,0xff],
-                  "purple" => [0x80,0,0x80]
+                  "purple" => [0x80,0,0x80], "orange" => [0xff, 0xa5, 0]
 
   # web format
 
