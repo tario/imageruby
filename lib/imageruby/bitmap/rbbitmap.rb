@@ -27,6 +27,7 @@ module ImageRuby
     attr_reader :width
     attr_reader :height
 
+    # Initialize the representation of bitmap with the given width and height (used internally)
     def initialize_bitmap_representation(width_, height_, color = nil)
 
       color ||= Color.from_rgb(0,0,0)
@@ -54,6 +55,7 @@ module ImageRuby
       self
     end
 
+    # Creates a duplicate of the image
     def dup
       ret = super
       ret.initialize_dup(self)
@@ -76,10 +78,28 @@ module ImageRuby
       self
     end
 
+    # returns the pixel data string with the RGB information of the pixels
+    #
+    # To get the color value (including alpha) of a pixel on given x,y coordinates use image.get_pixel(x,y) or image[x,y]
+    #
+    # Examples
+    #
+    #   bitmap.pixel_data[(12)*bitmap.width+10] # the red channel at x=12, y=10
+    #   bitmap.pixel_data[(12)*bitmap.width+10+1] # the green channel at x=12, y=10
+    #   bitmap.pixel_data[(12)*bitmap.width+10+2] # the blue channel at x=12, y=10
     def pixel_data
       @array
     end
 
+    # returns the alpha data string with the alpha channel information of the pixels
+    #
+    # To get the color value of a pixel on given x,y coordinates use image.get_pixel(x,y) or image[x,y]
+    #
+    # Examples
+    #
+    #   bitmap.pixel_data[(12)*bitmap.width+10] # the alpha value at x=12, y=10
+    #   bitmap.pixel_data[(12)*bitmap.width+11] # the alpha value at x=12, y=11
+    #   bitmap.pixel_data[(12)*bitmap.width+12] # the alpha value at x=12, y=12
     def alpha_data
       @alpha = "\xff"*(@height * @width) unless @alpha
       @alpha
