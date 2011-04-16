@@ -22,15 +22,17 @@ require "imageruby/encoder"
 require "imageruby/decoder"
 require "imageruby/bitmap/bitmap"
 require "imageruby/bitmap/rbbitmap"
-require "imageruby/baseimage"
 
 module ImageRuby
+  class Image
+  end
 
-  class Image < BaseImage
+  def self.register_image_mixin(modl)
+    Image.class_eval{ include modl }
+  end
 
-    ImageRuby.image_mixin.each do |modl|
-      include modl
-    end
+  class Image
+    include Bitmap.bitmap_representation
 
     def initialize(width_, height_, color = nil)
       super()
