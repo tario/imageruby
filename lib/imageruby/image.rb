@@ -24,9 +24,6 @@ require "imageruby/bitmap/bitmap"
 require "imageruby/bitmap/rbbitmap"
 
 module ImageRuby
-  class Image
-  end
-
   def self.register_image_mixin(modl)
     Image.class_eval{ include modl }
   end
