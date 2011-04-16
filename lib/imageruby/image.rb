@@ -33,6 +33,7 @@ module ImageRuby
     end
 
     def initialize(width_, height_, color = nil)
+      super()
       initialize_bitmap_representation(width_, height_, color)
 
       if block_given?
