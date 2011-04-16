@@ -91,6 +91,12 @@ public
     end
 
     def draw(x,y,image)
+      obj = self.dup()
+      obj.draw!(x,y,image)
+      obj
+    end
+
+    def draw!(x,y,image)
 
         dest_pixel_data = self.pixel_data
         orig_pixel_data = image.pixel_data
