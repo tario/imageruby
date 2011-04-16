@@ -28,9 +28,11 @@ module ImageRuby
 
     end
 
-    # Decodes an image from raw binary data (String)
+    # Decodes an image from raw binary data (String), raises UnableToDecodeException if the format
+    # of the encoded data is unknown
     #
     # To load a image from disk use Image.from_file(path) method
+
     def self.decode(data)
       Decoder.each_subclass do |sc|
         decoder = sc.new
