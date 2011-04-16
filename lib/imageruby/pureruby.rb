@@ -131,16 +131,27 @@ public
     #
     def draw!(x,y,image)
 
+        draw_height = image.height
+        draw_width = image.width
+
+        if y+image.height > self.height
+          draw_height = self.height - y
+        end
+
+        if x+image.width > self.width
+          draw_width = self.width - x
+        end
+
         dest_pixel_data = self.pixel_data
         orig_pixel_data = image.pixel_data
 
-        (0..image.height-1).each do |y_orig|
+        (0..draw_height-1).each do |y_orig|
           y_dest = y_orig + y
 
           origpointer = y_orig*image.width*3
           destpointer = (y_dest*width+x)*3
 
-          (0..image.width-1).each do |x_orig|
+          (0..draw_width-1).each do |x_orig|
             color = orig_pixel_data[origpointer..origpointer+2]
 
               alpha = image.alpha_data[y_orig*image.width+x_orig]
