@@ -20,7 +20,7 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 =end
 require "imageruby/encoder"
 
-class BmpEncoder < Encoder
+class BmpEncoder < ImageRuby::Encoder
 
   def encode(image, format, output)
     unless format == :bmp

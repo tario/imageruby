@@ -20,7 +20,7 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 =end
 require "imageruby/decoder"
 
-class BmpDecoder < Decoder
+class BmpDecoder < ImageRuby::Decoder
   def decode(data)
 
     # read bmp header

@@ -20,25 +20,26 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 =end
 require "imageruby/abstract/subclass_enum"
 
-class Encoder
-  with_enumerable_subclasses
+module ImageRuby
+  class Encoder
+    with_enumerable_subclasses
 
-  class UnableToEncodeException < Exception
+    class UnableToEncodeException < Exception
 
-  end
-
-  def self.encode(image,format,output)
-    Encoder.each_subclass do |sc|
-      encoder = sc.new
-
-      begin
-        return encoder.encode(image,format,output)
-      rescue UnableToEncodeException
-
-      end
     end
 
-    raise UnableToEncodeException
+    def self.encode(image,format,output)
+      Encoder.each_subclass do |sc|
+        encoder = sc.new
+
+        begin
+          return encoder.encode(image,format,output)
+        rescue UnableToEncodeException
+
+        end
+      end
+
+      raise UnableToEncodeException
+    end
   end
 end
-
