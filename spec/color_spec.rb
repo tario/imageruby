@@ -54,6 +54,20 @@ describe Color, "color" do
       it "color of name '#{color_name}' should be #{color_array.inspect}" do
       Color.send(color_name).should be == Color.coerce(color_array)
       end
+
+      color2 = Color.coerce(color_array)
+      it "color of name '#{color_name}' should be included on named_colors and must be #{color_array.inspect}" do
+        named_color = nil
+        Color.named_colors.each do |name, color|
+          if name == color_name
+            named_color = color
+            color.should be == color2
+          end
+        end
+
+        named_color.should be != nil
+      end
+
     end
   end
 
