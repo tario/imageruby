@@ -21,6 +21,10 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 module ImageRuby
 
     class Color
+
+      class << self
+        private :new
+      end
       # Add a new named Color
       # Example:
       #
@@ -86,7 +90,7 @@ module ImageRuby
 
       def self.from_rgba(r_,g_,b_,a_)
 
-        c = Color.new
+        c = new
         c.r = r_
         c.g = g_
         c.b = b_
