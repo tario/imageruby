@@ -27,6 +27,10 @@ module ImageRuby
     class UnableToDecodeException < Exception
 
     end
+
+    # Decodes an image from raw binary data (String)
+    #
+    # To load a image from disk use Image.from_file(path) method
     def self.decode(data)
       Decoder.each_subclass do |sc|
         decoder = sc.new

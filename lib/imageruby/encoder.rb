@@ -28,6 +28,15 @@ module ImageRuby
 
     end
 
+    # encode a image with the given format writing the binary data to the output
+    # output can be a string or a open file
+    #
+    # To save a file to disk use the method save of the image class
+    #
+    # Example
+    #
+    #   output = String.new
+    #   Encoder.encode(image,:bmp,output)
     def self.encode(image,format,output)
       Encoder.each_subclass do |sc|
         encoder = sc.new
