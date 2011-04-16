@@ -83,6 +83,16 @@ module ImageRuby
         @r = value
       end
 
+      def g=(value)
+        raise OutOfRangeException if value<0 or value>255
+        @g = value
+      end
+
+      def b=(value)
+        raise OutOfRangeException if value<0 or value>255
+        @b = value
+      end
+
       def a=(value)
         raise OutOfRangeException if value<0 or value>255
         @a = value
