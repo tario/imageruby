@@ -22,6 +22,10 @@ module ImageRuby
 
     class Color
 
+      class OutOfRangeException < Exception
+
+      end
+
       class << self
         private :new
       end
@@ -73,6 +77,11 @@ module ImageRuby
       alias :green :g
       alias :blue :b
       alias :alpha :a
+
+      def r=(value)
+        raise OutOfRangeException if value<0 or value>255
+        @r = value
+      end
 
       # Create a color from given red, green and blue values (between 0 and 255)
       #
