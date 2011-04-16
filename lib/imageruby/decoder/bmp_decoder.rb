@@ -21,7 +21,7 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 require "imageruby/decoder"
 
 class BmpDecoder < ImageRuby::Decoder
-  def decode(data)
+  def decode(data, image_class)
 
     # read bmp header
     header = data[0..13]
@@ -41,7 +41,7 @@ class BmpDecoder < ImageRuby::Decoder
 
     # create image object
 
-    image = ImageRuby::Image.new(width,height)
+    image = image_class.new(width,height)
 
     padding_size = ( 4 - (width * 3 % 4) ) % 4
     width_array_len = width*3 + padding_size

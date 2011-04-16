@@ -58,7 +58,7 @@ module ImageRuby
 
       decoded = nil
       File.open(path,"rb") do |file|
-        decoded = Decoder.decode(file.read)
+        decoded = Decoder.decode(file.read, ImageRuby::Image)
       end
 
       decoded

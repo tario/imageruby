@@ -33,12 +33,12 @@ module ImageRuby
     #
     # To load a image from disk use Image.from_file(path) method
 
-    def self.decode(data)
+    def self.decode(data, image_class)
       Decoder.each_subclass do |sc|
         decoder = sc.new
 
         begin
-          return decoder.decode(data)
+          return decoder.decode(data, image_class)
         rescue UnableToDecodeException
 
         end
