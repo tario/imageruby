@@ -31,6 +31,14 @@ module ImageRuby
   class Image
     include Bitmap.bitmap_representation
 
+    # Create an image with the given width and height filled with the specified color (black if not specified)
+    # Also, the method allow the construction of image pixel by pixel if a block is passed
+    #
+    # Examples:
+    #
+    #   image = Image.new(30,20) # creates an image of width 30, height 20 and filled with black
+    #   image = Image.new(30,20,Color.orange) # creates an image of width 30, height 20 and filled with orange
+    #   image = Image.new(30,20) {|x,y| Color.from_rgb(x*8,0,0) } # creates an image of width 30, height 20 and filled with a gradient
     def initialize(width_, height_, color = nil)
       super()
       initialize_bitmap_representation(width_, height_, color)
