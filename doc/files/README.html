@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Sun Apr 17 18:13:11 -0300 2011</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1><a href="../classes/ImageRuby.html">ImageRuby</a> - flexible ruby gem for image processing</h1>
+<p>
+<a href="../classes/ImageRuby.html">ImageRuby</a> is a gem for image
+processing written in pure ruby, this makes the library very portable and
+easy to install
+</p>
+<p>
+Also, the gem was desgined to accept extensions like:
+</p>
+<pre>
+ * new format decoders made from scratch (Ruby or C)
+ * new format decoders based on existent C libraries like libpng, libbmp, etc...
+ * new image operations (Ruby or C)
+ * re-implementations of parts in C to improve performance on environments where it is possible
+</pre>
+<h2>Installation</h2>
+<h3>Gem installation</h3>
+<p>
+sudo gem install imageruby
+</p>
+<h2>Documentation</h2>
+<p>
+Full API documentation can be found on: <a
+href="http://tario.github.com/imageruby/doc">tario.github.com/imageruby/doc</a>/
+</p>
+<h2>Examples</h2>
+<p>
+NOTE: Examples loads and saves bitmap files, imageruby-bmp gem must be
+installed in order to get the examples work
+</p>
+<h3>Create and save a black image</h3>
+<pre>
+  require &quot;rubygems&quot;
+  require &quot;imageruby&quot;
+
+  include ImageRuby
+
+  #  creates an image of 150x150 pixels filled with black
+  image = ImageRuby::Image.new(150,150, Color.black)
+
+  begin
+  # this only work if imageruby-bmp gem is installed
+  image.save(&quot;black.bmp&quot;, :bmp)
+  rescue
+    print &quot;Error while trying to save, you must install imageruby-bmp gem&quot;
+  end
+</pre>
+<h3>Create an image with vertical stripes filled with default named colors</h3>
+<pre>
+  require &quot;rubygems&quot;
+  require &quot;imageruby&quot;
+
+  include ImageRuby
+
+  print &quot;list of named colors:\n&quot;
+  print &quot;--------------------------\n&quot;
+
+  colors = Array.new
+
+  Color.named_colors.each do |name, color|
+        print &quot;#{name}: #{color.inspect}\n&quot;
+        colors &lt;&lt; color
+  end
+
+  image = Image.new( colors.count * 32, 512)
+
+  x = 0
+  colors.each do |color|
+  image[x..x+31, 0..511] = Image.new(32,512,color)
+  x = x + 32
+  end
+
+  image.save(&quot;colors.bmp&quot;, :bmp)
+</pre>
+<h3>Gradient using block parameter</h3>
+<pre>
+  require &quot;rubygems&quot;
+  require &quot;imageruby&quot;
+
+  include ImageRuby
+
+  gradient_images = Array.new
+
+  gradient_images &lt;&lt; Image.new(64,64) {|x,y|
+    Color.from_rgb(x*4,y*4,0)
+  }
+
+  gradient_images &lt;&lt; Image.new(64,64) {|x,y|
+    Color.from_rgb(0,x*4,y*4)
+  }
+
+  gradient_images &lt;&lt; Image.new(64,64) {|x,y|
+    Color.from_rgb(y*4,0,x*4)
+  }
+
+  (0..gradient_images.count-1).each do |i|
+        gradient_images[i].save(&quot;gradient#{i}.bmp&quot;, :bmp)
+  end
+
+  all_gradient = Image.new(96*gradient_images.count, 96)
+
+  (0..gradient_images.count-1).each do |i|
+        all_gradient.draw!(i*96+16, 16, gradient_images[i])
+  end
+
+  all_gradient.save(&quot;gradients.bmp&quot;, :bmp)
+</pre>
+<h3>Draw with mask</h3>
+<pre>
+  require &quot;rubygems&quot;
+  require &quot;imageruby&quot;
+
+  include ImageRuby
+
+  colors = Image.from_file(&quot;colors.bmp&quot;)
+  gradients = Image.from_file(&quot;gradients.bmp&quot;)
+
+  without_mask = colors.draw(128,192,gradients)
+  without_mask.save(&quot;without_mask.bmp&quot;, :bmp)
+
+  with_mask = colors.draw(128,192,gradients.mask(Color.black))
+  with_mask.save(&quot;with_mask.bmp&quot;, :bmp)
+</pre>
+<h3>Draw with transparency effects</h3>
+<pre>
+  require &quot;rubygems&quot;
+  require &quot;imageruby&quot;
+
+  include ImageRuby
+
+  colors = Image.from_file(&quot;colors.bmp&quot;)
+  gradients = Image.from_file(&quot;gradients.bmp&quot;)
+
+  transparent_black = Color.black
+  transparent_black.a = 128
+
+  colors.draw(128,192,gradients.color_replace(Color.black, transparent_black)).save(&quot;sample1.bmp&quot;, :bmp)
+
+  half_transparent = gradients.map_pixel{ |x,y,c|
+        c.a = 128 if x &gt;144
+        c
+  }
+  colors.draw(128,192,half_transparent).save(&quot;sample2.bmp&quot;, :bmp)
+</pre>
+<h2>Copying</h2>
+<p>
+Copyright (c) 2011 Dario Seminara, released under the GPL License (see
+LICENSE)
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

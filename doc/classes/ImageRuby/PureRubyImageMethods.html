@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ImageRuby::PureRubyImageMethods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ImageRuby::PureRubyImageMethods</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/imageruby/pureruby_rb.html">
+                lib/imageruby/pureruby.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000006">[]</a>&nbsp;&nbsp;
+      <a href="#M000007">[]=</a>&nbsp;&nbsp;
+      <a href="#M000013">color_replace</a>&nbsp;&nbsp;
+      <a href="#M000014">color_replace!</a>&nbsp;&nbsp;
+      <a href="#M000008">draw</a>&nbsp;&nbsp;
+      <a href="#M000009">draw!</a>&nbsp;&nbsp;
+      <a href="#M000010">each_pixel</a>&nbsp;&nbsp;
+      <a href="#M000017">inspect</a>&nbsp;&nbsp;
+      <a href="#M000011">map_pixel</a>&nbsp;&nbsp;
+      <a href="#M000012">map_pixel!</a>&nbsp;&nbsp;
+      <a href="#M000015">mask</a>&nbsp;&nbsp;
+      <a href="#M000016">on_chain</a>&nbsp;&nbsp;
+      <a href="#M000005">save</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="#M000006" class="method-signature">
+          <span class="method-name">[]</span><span class="method-args">(x,y)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returs the color of a pixel locate in the given x and y coordinates or a
+rectangle section of the image if a range is specified
+</p>
+<p>
+Example
+</p>
+<pre>
+  image[0,0] # return a Color object representing the color of the pixel at 0,0
+  image[0..20,10..30] # return a image object with the cropped rectagle with x between 0 and 20 and y between 10 and 30
+  image[0..20,20] # return a image object cropped rectagle with x between 0 and 20 and y equals 15
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 58</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span> (<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span>
+        <span class="ruby-identifier">get_pixel</span>(<span class="ruby-identifier">fixx</span>(<span class="ruby-identifier">x</span>),<span class="ruby-identifier">fixy</span>(<span class="ruby-identifier">y</span>))
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">x</span> = (<span class="ruby-identifier">fixx</span>(<span class="ruby-identifier">x</span>)<span class="ruby-operator">..</span><span class="ruby-identifier">fixx</span>(<span class="ruby-identifier">x</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span>
+        <span class="ruby-identifier">y</span> = (<span class="ruby-identifier">fixy</span>(<span class="ruby-identifier">y</span>)<span class="ruby-operator">..</span><span class="ruby-identifier">fixy</span>(<span class="ruby-identifier">y</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Range</span>
+          <span class="ruby-identifier">x</span> = (<span class="ruby-identifier">fixx</span>(<span class="ruby-identifier">x</span>.<span class="ruby-identifier">first</span>)<span class="ruby-operator">..</span><span class="ruby-identifier">fixx</span>(<span class="ruby-identifier">x</span>.<span class="ruby-identifier">last</span>))
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Range</span>
+          <span class="ruby-identifier">y</span> = (<span class="ruby-identifier">fixy</span>(<span class="ruby-identifier">y</span>.<span class="ruby-identifier">first</span>)<span class="ruby-operator">..</span><span class="ruby-identifier">fixy</span>(<span class="ruby-identifier">y</span>.<span class="ruby-identifier">last</span>))
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">newimg</span> = <span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">first</span>, <span class="ruby-identifier">y</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">first</span>)
+
+        <span class="ruby-identifier">width</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">count</span>
+        (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">y</span>.<span class="ruby-identifier">count</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y_</span><span class="ruby-operator">|</span>
+
+          <span class="ruby-identifier">destpointer</span> = <span class="ruby-identifier">y_</span><span class="ruby-operator">*</span><span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>
+          <span class="ruby-identifier">origpointer</span> = ((<span class="ruby-identifier">y</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">y_</span>)<span class="ruby-operator">*</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">width</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">first</span>)<span class="ruby-operator">*</span><span class="ruby-value">3</span>
+
+          <span class="ruby-identifier">newimg</span>.<span class="ruby-identifier">pixel_data</span>[<span class="ruby-identifier">destpointer</span><span class="ruby-operator">..</span><span class="ruby-identifier">destpointer</span><span class="ruby-operator">+</span><span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>] =
+            <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">pixel_data</span>[<span class="ruby-identifier">origpointer</span><span class="ruby-operator">..</span><span class="ruby-identifier">origpointer</span><span class="ruby-operator">+</span><span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>]
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">newimg</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="#M000007" class="method-signature">
+          <span class="method-name">[]=</span><span class="method-args">(x,y,obj)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the color of a pixel locate in the given x and y coordinates or replace
+a rectangle section of the image with other image of equal dimensions if a
+range is specified
+</p>
+<p>
+Example
+</p>
+<pre>
+  image[0,0] = Color.red # set the color of pixel at 0,0 to Color.red
+  image[0..20,10..30] = other_image # replace the rectagle with x between 0 and 20 and y between 10 and 30 with other_image
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 98</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span> (<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">obj</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span>
+        <span class="ruby-identifier">set_pixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">obj</span>)
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">x</span> = (<span class="ruby-identifier">x</span><span class="ruby-operator">..</span><span class="ruby-identifier">x</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span>
+        <span class="ruby-identifier">y</span> = (<span class="ruby-identifier">y</span><span class="ruby-operator">..</span><span class="ruby-identifier">y</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">instance_of?</span> <span class="ruby-constant">Fixnum</span>
+
+        <span class="ruby-identifier">width</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">count</span>
+        (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">y</span>.<span class="ruby-identifier">count</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y_</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">origpointer</span> = <span class="ruby-identifier">y_</span><span class="ruby-operator">*</span><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>
+          <span class="ruby-identifier">destpointer</span> = ((<span class="ruby-identifier">y</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">y_</span>)<span class="ruby-operator">*</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">width</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">first</span>)<span class="ruby-operator">*</span><span class="ruby-value">3</span>
+
+          <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">pixel_data</span>[<span class="ruby-identifier">destpointer</span><span class="ruby-operator">..</span><span class="ruby-identifier">destpointer</span><span class="ruby-operator">+</span><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-value">3</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>] =
+            <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">pixel_data</span>[<span class="ruby-identifier">origpointer</span><span class="ruby-operator">..</span><span class="ruby-identifier">origpointer</span><span class="ruby-operator">+</span><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-value">3</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="#M000013" class="method-signature">
+          <span class="method-name">color_replace</span><span class="method-args">(color1, color2)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Duplicate the image and then call <a
+href="PureRubyImageMethods.html#M000014">color_replace!</a> method with the
+given parameters
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000013-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 236</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">color_replace</span>(<span class="ruby-identifier">color1</span>, <span class="ruby-identifier">color2</span>)
+
+      <span class="ruby-identifier">newimage</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">newimage</span>.<span class="ruby-identifier">color_replace!</span>(<span class="ruby-identifier">color1</span>,<span class="ruby-identifier">color2</span>)
+      <span class="ruby-identifier">newimage</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="#M000014" class="method-signature">
+          <span class="method-name">color_replace!</span><span class="method-args">( color1, color2)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace the color given in the first argument by the color given in the
+second with alpha values
+</p>
+<p>
+Examples
+</p>
+<pre>
+  image.color_replace!(Color.red, Color.black) # replace red with black
+  image.color_replace!(Color.black, Color.coerce([0,0,0,128]) ) # replace black with %50 transparent black
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000014-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 249</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">color_replace!</span>( <span class="ruby-identifier">color1</span>, <span class="ruby-identifier">color2</span>)
+      <span class="ruby-identifier">strcolor1</span> = <span class="ruby-identifier">color1</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-identifier">strcolor2</span> = <span class="ruby-identifier">color2</span>.<span class="ruby-identifier">to_s</span>
+
+      <span class="ruby-identifier">a</span> = <span class="ruby-identifier">color2</span>.<span class="ruby-identifier">a</span>
+
+      (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-identifier">height</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pixel_data</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">*</span><span class="ruby-value">3</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span><span class="ruby-operator">*</span><span class="ruby-value">3</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">strcolor1</span> <span class="ruby-keyword kw">then</span>
+          <span class="ruby-identifier">pixel_data</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">*</span><span class="ruby-value">3</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span><span class="ruby-operator">*</span><span class="ruby-value">3</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>] = <span class="ruby-identifier">strcolor2</span>
+          <span class="ruby-identifier">alpha_data</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">a</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="#M000008" class="method-signature">
+          <span class="method-name">draw</span><span class="method-args">(x,y,image)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Duplicates the image and <a
+href="PureRubyImageMethods.html#M000008">draw</a> into the duplicate with
+the given parameters (by calling <a
+href="PureRubyImageMethods.html#M000009">draw!</a>)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 118</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">image</span>)
+      <span class="ruby-identifier">obj</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dup</span>()
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">draw!</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">image</span>)
+      <span class="ruby-identifier">obj</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="#M000009" class="method-signature">
+          <span class="method-name">draw!</span><span class="method-args">(x,y,image)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Draw a given image to the given x and y coordinates (matching left-upper
+corner of the drawn image) when drawing, the method use the alpha channel
+of the origin image to properly implement alpha drawing (transparency)
+</p>
+<p>
+Examples:
+</p>
+<pre>
+  image.draw!(0,0,other_image)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 132</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw!</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">image</span>)
+
+        <span class="ruby-identifier">draw_height</span> = <span class="ruby-identifier">image</span>.<span class="ruby-identifier">height</span>
+        <span class="ruby-identifier">draw_width</span> = <span class="ruby-identifier">image</span>.<span class="ruby-identifier">width</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">y</span><span class="ruby-operator">+</span><span class="ruby-identifier">image</span>.<span class="ruby-identifier">height</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">height</span>
+          <span class="ruby-identifier">draw_height</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">height</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">y</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">x</span><span class="ruby-operator">+</span><span class="ruby-identifier">image</span>.<span class="ruby-identifier">width</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">width</span>
+          <span class="ruby-identifier">draw_width</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">width</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">dest_pixel_data</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">pixel_data</span>
+        <span class="ruby-identifier">orig_pixel_data</span> = <span class="ruby-identifier">image</span>.<span class="ruby-identifier">pixel_data</span>
+
+        (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">draw_height</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y_orig</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">y_dest</span> = <span class="ruby-identifier">y_orig</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">y</span>
+
+          <span class="ruby-identifier">origpointer</span> = <span class="ruby-identifier">y_orig</span><span class="ruby-operator">*</span><span class="ruby-identifier">image</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>
+          <span class="ruby-identifier">destpointer</span> = (<span class="ruby-identifier">y_dest</span><span class="ruby-operator">*</span><span class="ruby-identifier">width</span><span class="ruby-operator">+</span><span class="ruby-identifier">x</span>)<span class="ruby-operator">*</span><span class="ruby-value">3</span>
+
+          (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">draw_width</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x_orig</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">color</span> = <span class="ruby-identifier">orig_pixel_data</span>[<span class="ruby-identifier">origpointer</span><span class="ruby-operator">..</span><span class="ruby-identifier">origpointer</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>]
+
+              <span class="ruby-identifier">alpha</span> = <span class="ruby-identifier">image</span>.<span class="ruby-identifier">alpha_data</span>[<span class="ruby-identifier">y_orig</span><span class="ruby-operator">*</span><span class="ruby-identifier">image</span>.<span class="ruby-identifier">width</span><span class="ruby-operator">+</span><span class="ruby-identifier">x_orig</span>]
+
+                <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">alpha</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">255</span>
+                  <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">alpha</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+                    <span class="ruby-identifier">dest_pixel_data</span>[<span class="ruby-identifier">destpointer</span>] =
+                      ( <span class="ruby-identifier">orig_pixel_data</span>[<span class="ruby-identifier">origpointer</span>]<span class="ruby-operator">*</span>(<span class="ruby-identifier">alpha</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">dest_pixel_data</span>[<span class="ruby-identifier">destpointer</span>]<span class="ruby-operator">*</span>(<span class="ruby-value">255</span><span class="ruby-operator">-</span><span class="ruby-identifier">alpha</span>) ) <span class="ruby-operator">/</span> <span class="ruby-value">255</span>
+                      <span class="ruby-identifier">origpointer</span> = <span class="ruby-identifier">origpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+                      <span class="ruby-identifier">destpointer</span> = <span class="ruby-identifier">destpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+
+                    <span class="ruby-identifier">dest_pixel_data</span>[<span class="ruby-identifier">destpointer</span>] =
+                      ( <span class="ruby-identifier">orig_pixel_data</span>[<span class="ruby-identifier">origpointer</span>]<span class="ruby-operator">*</span>(<span class="ruby-identifier">alpha</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">dest_pixel_data</span>[<span class="ruby-identifier">destpointer</span>]<span class="ruby-operator">*</span>(<span class="ruby-value">255</span><span class="ruby-operator">-</span><span class="ruby-identifier">alpha</span>) ) <span class="ruby-operator">/</span> <span class="ruby-value">255</span>
+                      <span class="ruby-identifier">origpointer</span> = <span class="ruby-identifier">origpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+                      <span class="ruby-identifier">destpointer</span> = <span class="ruby-identifier">destpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+
+                    <span class="ruby-identifier">dest_pixel_data</span>[<span class="ruby-identifier">destpointer</span>] =
+                      ( <span class="ruby-identifier">orig_pixel_data</span>[<span class="ruby-identifier">origpointer</span>]<span class="ruby-operator">*</span>(<span class="ruby-identifier">alpha</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">dest_pixel_data</span>[<span class="ruby-identifier">destpointer</span>]<span class="ruby-operator">*</span>(<span class="ruby-value">255</span><span class="ruby-operator">-</span><span class="ruby-identifier">alpha</span>) ) <span class="ruby-operator">/</span> <span class="ruby-value">255</span>
+                      <span class="ruby-identifier">origpointer</span> = <span class="ruby-identifier">origpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+                      <span class="ruby-identifier">destpointer</span> = <span class="ruby-identifier">destpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+
+                  <span class="ruby-keyword kw">else</span>
+                    <span class="ruby-identifier">destpointer</span> = <span class="ruby-identifier">destpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">3</span>
+                    <span class="ruby-identifier">origpointer</span> = <span class="ruby-identifier">origpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">3</span>
+                  <span class="ruby-keyword kw">end</span>
+                <span class="ruby-keyword kw">else</span>
+                  <span class="ruby-identifier">dest_pixel_data</span>[<span class="ruby-identifier">destpointer</span><span class="ruby-operator">..</span><span class="ruby-identifier">destpointer</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>] = <span class="ruby-identifier">color</span>
+                  <span class="ruby-identifier">destpointer</span> = <span class="ruby-identifier">destpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">3</span>
+                  <span class="ruby-identifier">origpointer</span> = <span class="ruby-identifier">origpointer</span> <span class="ruby-operator">+</span> <span class="ruby-value">3</span>
+                <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="#M000010" class="method-signature">
+          <span class="method-name">each_pixel</span><span class="method-args">() {|x,y,get_pixel(x,y)| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Walks each pixel on the image, block is mandantory to call this function
+and return as yield block calls x,y and pixel color for each pixel of the
+image
+</p>
+<p>
+This function does not allow to modify any color information of the image
+(use <a href="PureRubyImageMethods.html#M000011">map_pixel</a> for that)
+</p>
+<p>
+Examples:
+</p>
+<pre>
+  image.each_pixel do |x,y,color|
+    print &quot;pixel at (#{x},#{y}): #{color.inspect}\n&quot;
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 201</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_pixel</span>
+      (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@width</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@height</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">get_pixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="#M000017" class="method-signature">
+          <span class="method-name">inspect</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000017-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 286</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>()
+      <span class="ruby-node">&quot;#&lt;ImageRuby::Image:#{object_id} @width=#{@width}, @height=#{@height}&gt;&quot;</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="#M000011" class="method-signature">
+          <span class="method-name">map_pixel</span><span class="method-args">() {|x,y,get_pixel(x,y)| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a new image of same dimensions in which each pixel is replaced with
+the value returned by the block passed as parameter, the block receives the
+coordinates and color of each pixel
+</p>
+<p>
+Example
+</p>
+<pre>
+  image_without_red = image.map_pixel{|x,y,color| color.r = 0; color } # remove color channel of all pixels
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000011-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 215</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">map_pixel</span>
+      <span class="ruby-constant">Image</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@width</span>, <span class="ruby-ivar">@height</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">get_pixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>))
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="#M000012" class="method-signature">
+          <span class="method-name">map_pixel!</span><span class="method-args">() {|x,y,get_pixel(x,y)| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace each pixel of the image with the value returned by the block passed
+as parameter, the block receives the coordinates and color of each pixel
+</p>
+<p>
+Example
+</p>
+<pre>
+  image.map_pixel!{|x,y,color| color.r = 0; color } # remove color channel of all pixels
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 227</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">map_pixel!</span>
+      <span class="ruby-identifier">each_pixel</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">color</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">set_pixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>, <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">get_pixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)))
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="#M000015" class="method-signature">
+          <span class="method-name">mask</span><span class="method-args">(color1 = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Replace a color with %100 transparency, useful for <a
+href="PureRubyImageMethods.html#M000015">mask</a> drawing
+</p>
+<p>
+Example
+</p>
+<pre>
+  masked = other_image.mask(Color.black)
+  image.draw(0,0,masked) # draw the image without the black pixels
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000015-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 269</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mask</span>(<span class="ruby-identifier">color1</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-identifier">color1</span> = <span class="ruby-identifier">color1</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Color</span>.<span class="ruby-identifier">from_rgb</span>(<span class="ruby-value">255</span>,<span class="ruby-value">255</span>,<span class="ruby-value">255</span>)
+      <span class="ruby-identifier">color2</span> = <span class="ruby-identifier">color1</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">color2</span>.<span class="ruby-identifier">a</span> = <span class="ruby-value">0</span>
+
+      <span class="ruby-identifier">color_replace</span>(<span class="ruby-identifier">color1</span>,<span class="ruby-identifier">color2</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
+
+        <div class="method-heading">
+          <a href="#M000016" class="method-signature">
+          <span class="method-name">on_chain</span><span class="method-args">() {|self| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+For sugar syntax, yield the image and then return self
+</p>
+<p>
+Example:
+</p>
+<pre>
+  Image.from_file(&quot;input.bmp&quot;).on_chain{|img| img[0,0] = Color.red }.save(&quot;output.bmp&quot;)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000016-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 282</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_chain</span>
+      <span class="ruby-keyword kw">yield</span>(<span class="ruby-keyword kw">self</span>); <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="#M000005" class="method-signature">
+          <span class="method-name">save</span><span class="method-args">(path, format)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Save the image to a given file by path and format
+</p>
+<p>
+Example
+</p>
+<pre>
+  image.save(&quot;output.bmp&quot;, :bmp)
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/pureruby.rb, line 32</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">format</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value str">&quot;wb&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">str</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">encode</span>(<span class="ruby-identifier">format</span>,<span class="ruby-identifier">str</span>)
+        <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">str</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

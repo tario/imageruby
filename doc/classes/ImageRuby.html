@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ImageRuby</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ImageRuby</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/imageruby/color_rb.html">
+                lib/imageruby/color.rb
+                </a>
+        <br />
+                <a href="../files/lib/imageruby/image_rb.html">
+                lib/imageruby/image.rb
+                </a>
+        <br />
+                <a href="../files/lib/imageruby/encoder_rb.html">
+                lib/imageruby/encoder.rb
+                </a>
+        <br />
+                <a href="../files/lib/imageruby/bitmap/bitmap_rb.html">
+                lib/imageruby/bitmap/bitmap.rb
+                </a>
+        <br />
+                <a href="../files/lib/imageruby/bitmap/rbbitmap_rb.html">
+                lib/imageruby/bitmap/rbbitmap.rb
+                </a>
+        <br />
+                <a href="../files/lib/imageruby/pureruby_rb.html">
+                lib/imageruby/pureruby.rb
+                </a>
+        <br />
+                <a href="../files/lib/imageruby/decoder_rb.html">
+                lib/imageruby/decoder.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000004">register_image_mixin</a>&nbsp;&nbsp;
+      <a href="#M000003">to_s</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Module <a href="ImageRuby/PureRubyImageMethods.html" class="link">ImageRuby::PureRubyImageMethods</a><br />
+Module <a href="ImageRuby/RubyBitmapModl.html" class="link">ImageRuby::RubyBitmapModl</a><br />
+Class <a href="ImageRuby/Bitmap.html" class="link">ImageRuby::Bitmap</a><br />
+Class <a href="ImageRuby/Color.html" class="link">ImageRuby::Color</a><br />
+Class <a href="ImageRuby/Decoder.html" class="link">ImageRuby::Decoder</a><br />
+Class <a href="ImageRuby/Encoder.html" class="link">ImageRuby::Encoder</a><br />
+Class <a href="ImageRuby/Image.html" class="link">ImageRuby::Image</a><br />
+Class <a href="ImageRuby/RubyBitmap.html" class="link">ImageRuby::RubyBitmap</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">register_image_mixin</span><span class="method-args">(modl)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/image.rb, line 27</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">register_image_mixin</span>(<span class="ruby-identifier">modl</span>)
+    <span class="ruby-constant">Image</span>.<span class="ruby-identifier">class_eval</span>{ <span class="ruby-identifier">include</span> <span class="ruby-identifier">modl</span> }
+  <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">to_s</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/color.rb, line 169</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+      <span class="ruby-identifier">b</span>.<span class="ruby-identifier">chr</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">chr</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">chr</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ImageRuby::RubyBitmapModl</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ImageRuby::RubyBitmapModl</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/imageruby/bitmap/rbbitmap_rb.html">
+                lib/imageruby/bitmap/rbbitmap.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000024">alpha_data</a>&nbsp;&nbsp;
+      <a href="#M000021">dup</a>&nbsp;&nbsp;
+      <a href="#M000019">get_pixel</a>&nbsp;&nbsp;
+      <a href="#M000018">initialize_bitmap_representation</a>&nbsp;&nbsp;
+      <a href="#M000020">initialize_dup</a>&nbsp;&nbsp;
+      <a href="#M000023">pixel_data</a>&nbsp;&nbsp;
+      <a href="#M000022">set_pixel</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">height</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">width</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="#M000024" class="method-signature">
+          <span class="method-name">alpha_data</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns the alpha data string with the alpha channel information of the
+pixels
+</p>
+<p>
+To get the color value of a pixel on given x,y coordinates use
+image.get_pixel(x,y) or image[x,y]
+</p>
+<p>
+Examples
+</p>
+<pre>
+  bitmap.pixel_data[(12)*bitmap.width+10] # the alpha value at x=12, y=10
+  bitmap.pixel_data[(12)*bitmap.width+11] # the alpha value at x=12, y=11
+  bitmap.pixel_data[(12)*bitmap.width+12] # the alpha value at x=12, y=12
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000024-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/bitmap/rbbitmap.rb, line 103</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alpha_data</span>
+      <span class="ruby-ivar">@alpha</span> = <span class="ruby-value str">&quot;\xff&quot;</span><span class="ruby-operator">*</span>(<span class="ruby-ivar">@height</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@width</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@alpha</span>
+      <span class="ruby-ivar">@alpha</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="#M000021" class="method-signature">
+          <span class="method-name">dup</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a duplicate of the image
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000021-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/bitmap/rbbitmap.rb, line 59</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">ret</span> = <span class="ruby-keyword kw">super</span>
+      <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">initialize_dup</span>(<span class="ruby-keyword kw">self</span>)
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="#M000019" class="method-signature">
+          <span class="method-name">get_pixel</span><span class="method-args">(x,y)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+return a <a href="Color.html">Color</a> object of a given x and y coord
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000019-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/bitmap/rbbitmap.rb, line 40</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_pixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>)
+      <span class="ruby-identifier">index</span> = (<span class="ruby-identifier">y</span><span class="ruby-operator">*</span><span class="ruby-ivar">@width</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>)
+      <span class="ruby-identifier">pointindex</span> = <span class="ruby-identifier">index</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>
+      <span class="ruby-constant">Color</span>.<span class="ruby-identifier">from_rgba</span>(
+        <span class="ruby-ivar">@array</span>[<span class="ruby-identifier">pointindex</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>],
+        <span class="ruby-ivar">@array</span>[<span class="ruby-identifier">pointindex</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>],
+        <span class="ruby-ivar">@array</span>[<span class="ruby-identifier">pointindex</span>],
+        <span class="ruby-ivar">@alpha</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@alpha</span>[<span class="ruby-identifier">index</span>] <span class="ruby-operator">:</span> <span class="ruby-value">255</span>
+        )
+
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="#M000018" class="method-signature">
+          <span class="method-name">initialize_bitmap_representation</span><span class="method-args">(width_, height_, color = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Initialize the representation of bitmap with the given width and height
+(used internally)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000018-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/bitmap/rbbitmap.rb, line 31</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_bitmap_representation</span>(<span class="ruby-identifier">width_</span>, <span class="ruby-identifier">height_</span>, <span class="ruby-identifier">color</span> = <span class="ruby-keyword kw">nil</span>)
+
+      <span class="ruby-identifier">color</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Color</span>.<span class="ruby-identifier">from_rgb</span>(<span class="ruby-value">0</span>,<span class="ruby-value">0</span>,<span class="ruby-value">0</span>)
+
+      <span class="ruby-ivar">@width</span> = <span class="ruby-identifier">width_</span>
+      <span class="ruby-ivar">@height</span> = <span class="ruby-identifier">height_</span>
+      <span class="ruby-ivar">@array</span> = <span class="ruby-identifier">color</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">*</span><span class="ruby-ivar">@width</span><span class="ruby-operator">*</span><span class="ruby-ivar">@height</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="#M000020" class="method-signature">
+          <span class="method-name">initialize_dup</span><span class="method-args">(orig)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000020-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/bitmap/rbbitmap.rb, line 52</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_dup</span>(<span class="ruby-identifier">orig</span>)
+      <span class="ruby-ivar">@alpha</span> = <span class="ruby-identifier">orig</span>.<span class="ruby-identifier">alpha_data</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-ivar">@array</span> = <span class="ruby-identifier">orig</span>.<span class="ruby-identifier">pixel_data</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="#M000023" class="method-signature">
+          <span class="method-name">pixel_data</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns the pixel data string with the RGB information of the pixels
+</p>
+<p>
+To get the color value (including alpha) of a pixel on given x,y
+coordinates use image.get_pixel(x,y) or image[x,y]
+</p>
+<p>
+Examples
+</p>
+<pre>
+  bitmap.pixel_data[(12)*bitmap.width+10] # the red channel at x=12, y=10
+  bitmap.pixel_data[(12)*bitmap.width+10+1] # the green channel at x=12, y=10
+  bitmap.pixel_data[(12)*bitmap.width+10+2] # the blue channel at x=12, y=10
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000023-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/bitmap/rbbitmap.rb, line 90</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pixel_data</span>
+      <span class="ruby-ivar">@array</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="#M000022" class="method-signature">
+          <span class="method-name">set_pixel</span><span class="method-args">(x,y,color)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+set a color value for a image
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000022-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/imageruby/bitmap/rbbitmap.rb, line 65</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">set_pixel</span>(<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">color</span>)
+
+      <span class="ruby-identifier">index</span> = (<span class="ruby-identifier">y</span><span class="ruby-operator">*</span><span class="ruby-ivar">@width</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>)
+      <span class="ruby-identifier">pointindex</span> = <span class="ruby-identifier">index</span><span class="ruby-operator">*</span><span class="ruby-value">3</span>
+      <span class="ruby-ivar">@array</span>[<span class="ruby-identifier">pointindex</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>] = <span class="ruby-identifier">color</span>.<span class="ruby-identifier">r</span>
+      <span class="ruby-ivar">@array</span>[<span class="ruby-identifier">pointindex</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>] = <span class="ruby-identifier">color</span>.<span class="ruby-identifier">g</span>
+      <span class="ruby-ivar">@array</span>[<span class="ruby-identifier">pointindex</span>] = <span class="ruby-identifier">color</span>.<span class="ruby-identifier">b</span>
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">color</span>.<span class="ruby-identifier">a</span> <span class="ruby-operator">!=</span> <span class="ruby-value">255</span> <span class="ruby-keyword kw">then</span>
+        <span class="ruby-ivar">@alpha</span> = <span class="ruby-value str">&quot;\xff&quot;</span><span class="ruby-operator">*</span>(<span class="ruby-ivar">@height</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@width</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@alpha</span>
+        <span class="ruby-ivar">@alpha</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-identifier">color</span>.<span class="ruby-identifier">a</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
