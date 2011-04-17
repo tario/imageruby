@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc = true
   s.extra_rdoc_files = [ 'README' ]
 #  s.rdoc_options << '--main' << 'README'
-  s.files = Dir.glob("{examples,lib,test}/**/*") +
+  s.files = Dir.glob("{examples,lib,spec}/**/*") +
     [ 'LICENSE', 'AUTHORS', 'CHANGELOG', 'README', 'Rakefile' ]
 end
 
