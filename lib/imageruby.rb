@@ -24,9 +24,5 @@ require "imageruby/image"
 require "imageruby/pureruby"
 require "imageruby/abstract/auto_require"
 auto_require(/^imageruby-/)
-require "imageruby/decoder/bmp_decoder"
-require "imageruby/encoder/bmp_encoder"
-
-require "imageruby/decoder"
 
 
