@@ -18,13 +18,21 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "imageruby/image"
+require "imageruby/filepersistor"
 
-# extensions
-require "imageruby/pureruby"
-require "imageruby/abstract/auto_require"
-auto_require(/^imageruby-/)
+module ImageRuby
+  class EncoderPersistor < FilePersistor
+    def persist(image,path,format)
 
-require "imageruby/persistor/encoder_persistor"
+      encoded_string = String.new
 
+      ImageRuby::Encoder.encode(image,format,encoded_string)
 
+      File.open(path,"wb") do |file|
+        file.write encoded_string
+      end
+
+      nil
+    end
+  end
+end
