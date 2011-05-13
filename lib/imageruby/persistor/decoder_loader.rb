@@ -18,14 +18,17 @@ you should have received a copy of the gnu general public license
 along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "imageruby/image"
+require "imageruby/fileloader"
 
-# extensions
-require "imageruby/pureruby"
-require "imageruby/abstract/auto_require"
-auto_require(/^imageruby-/)
+module ImageRuby
+  class DecoderLoader < FileLoader
+    def load(path)
+      content = nil
+      File.open(path,"rb") do |file|
+        content = file.read
+      end
 
-require "imageruby/persistor/encoder_persistor"
-require "imageruby/persistor/decoder_loader"
-
-
+      ImageRuby::Decoder.decode(content, ImageRuby::Image)
+    end
+  end
+end
