@@ -28,7 +28,11 @@ module ImageRuby
         content = file.read
       end
 
-      ImageRuby::Decoder.decode(content, ImageRuby::Image)
+      begin
+        ImageRuby::Decoder.decode(content, ImageRuby::Image)
+      rescue ImageRuby::Decoder::UnableToDecodeException
+        raise UnableToLoadException
+      end
     end
   end
 end
