@@ -30,11 +30,7 @@ module ImageRuby
     #   image.save("output.bmp", :bmp)
     #
     def save(path, format)
-      File.open(path, "wb") do |file|
-        str = String.new
-        encode(format,str)
-        file.write str
-      end
+      FilePersistor.persist(self,path,format)
     end
 
 private
