@@ -24,6 +24,10 @@ module ImageRuby
   class FilePersistor
     with_enumerable_subclasses
 
+    class UnableToPersistException < Exception
+
+    end
+
     def self.persist(image,path,format)
       FilePersistor.each_subclass do |sc|
         persistor = sc.new
