@@ -26,12 +26,16 @@ module ImageRuby
 
       encoded_string = String.new
 
-      ImageRuby::Encoder.encode(image,format,encoded_string)
+      begin
+        ImageRuby::Encoder.encode(image,format,encoded_string)
 
-      File.open(path,"wb") do |file|
-        file.write encoded_string
+        File.open(path,"wb") do |file|
+          file.write encoded_string
+        end
+
+      rescue ImageRuby::Encoder::UnableToEncodeException
+        raise UnableToPersistException
       end
-
       nil
     end
   end
