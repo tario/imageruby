@@ -22,6 +22,7 @@ require "imageruby/encoder"
 require "imageruby/decoder"
 require "imageruby/bitmap/bitmap"
 require "imageruby/bitmap/rbbitmap"
+require "imageruby/fileloader"
 
 module ImageRuby
   def self.register_image_mixin(modl)
@@ -62,13 +63,7 @@ module ImageRuby
 
     # load a image from file
     def self.from_file(path)
-
-      decoded = nil
-      File.open(path,"rb") do |file|
-        decoded = Decoder.decode(file.read, ImageRuby::Image)
-      end
-
-      decoded
+      FileLoader.load(path)
     end
 
   end
