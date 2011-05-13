@@ -19,6 +19,7 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
 require "imageruby/bitmap/bitmap"
+require "imageruby/filepersistor"
 
 module ImageRuby
   module PureRubyImageMethods
