@@ -41,10 +41,10 @@ module ImageRuby
       index = (y*@width + x)
       pointindex = index*3
       Color.from_rgba(
-        @array[pointindex+2],
-        @array[pointindex+1],
-        @array[pointindex],
-        @alpha ? @alpha[index] : 255
+        @array[pointindex+2].ord,
+        @array[pointindex+1].ord,
+        @array[pointindex].ord,
+        @alpha ? @alpha[index].ord : 255
         )
 
     end
@@ -66,13 +66,13 @@ module ImageRuby
 
       index = (y*@width + x)
       pointindex = index*3
-      @array[pointindex+2] = color.r
-      @array[pointindex+1] = color.g
-      @array[pointindex] = color.b
+      @array[pointindex+2] = color.r.chr
+      @array[pointindex+1] = color.g.chr
+      @array[pointindex] = color.b.chr
 
       if color.a != 255 then
         @alpha = "\xff"*(@height * @width) unless @alpha
-        @alpha[index] = color.a
+        @alpha[index] = color.a.chr
       end
 
       self
