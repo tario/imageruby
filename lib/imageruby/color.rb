@@ -164,9 +164,11 @@ module ImageRuby
                   "olive" => [0x80,0x80,0], "lime" => [0,0xff,0], "aqua" => [0, 0xff, 0xff],
                   "teal" => [0, 0x80, 0x80], "navy" => [0,0,0x80], "fuchsia" => [0xff,0x00,0xff],
                   "purple" => [0x80,0,0x80], "orange" => [0xff, 0xa5, 0]
+
+      def to_s
+        self.b.chr + self.g.chr + self.r.chr
+      end
+
     end
 
-    def to_s
-      b.chr + g.chr + r.chr
-    end
 end
