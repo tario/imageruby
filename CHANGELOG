@@ -1,3 +1,5 @@
+0.2.1	Fixed compatibility with ruby 1.9 on bitmap representation (Thanks amadanmath!)
+
 0.2.0	Added persistor and loaders
 
 		Added more examples
