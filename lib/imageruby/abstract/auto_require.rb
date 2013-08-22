@@ -21,9 +21,19 @@ along with imageruby.  if not, see <http://www.gnu.org/licenses/>.
 require "rubygems"
 
 def auto_require(prefix)
-  Gem.source_index.each do |entry|
-    if entry[0] =~ prefix
-      require entry[1].name
+  # in Ruby 2.0 it appears Gem.source_index was removed. 
+  # The same functionality can be found using Gem::Specification
+  if defined?(Gem::Specification) && Gem::Specification.respond_to?(:each)
+    Gem::Specification.each do |entry|
+      if entry.name =~ prefix
+        require entry.name
+      end
+    end
+  else
+    Gem.source_index.each do |entry|
+      if entry[0] =~ prefix
+        require entry[1].name
+      end
     end
   end
 end
