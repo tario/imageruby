@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
+require 'rdoc/task'
 
 spec = Gem::Specification.new do |s|
   s.name = 'imageruby'
@@ -36,9 +36,10 @@ Rake::RDocTask.new :rdoc do |rd|
 end
 
 desc 'Build Gem'
-Rake::GemPackageTask.new spec do |pkg|
+Gem::PackageTask.new spec do |pkg|
   pkg.need_tar = true
 end
+
 
 desc 'Clean up'
 task :clean => [ :clobber_rdoc, :clobber_package ]
