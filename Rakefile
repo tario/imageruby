@@ -13,6 +13,7 @@ spec = Gem::Specification.new do |s|
   s.summary = 'flexible and easy to use ruby gem for image processing'
   s.homepage = "http://github.com/tario/imageruby"
   s.has_rdoc = true
+  s.license = 'GPL-3'
   s.extra_rdoc_files = [ 'README' ]
 #  s.rdoc_options << '--main' << 'README'
   s.files = Dir.glob("{examples,lib,spec}/**/*") +
