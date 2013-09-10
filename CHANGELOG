@@ -1,3 +1,11 @@
+0.2.4 fixed Color#inspect
+
+      fixed require on specs requiring "imageruby" instead of "lib/imageruby"
+
+      fixed encoding of alpha channels on replace_color! method (update to ruby1.9)
+
+      fixed error on alpha decoding when reading ordinal
+
 0.2.1	Fixed compatibility with ruby 1.9 on bitmap representation (Thanks amadanmath!)
 
 0.2.0	Added persistor and loaders
