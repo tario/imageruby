@@ -158,6 +158,10 @@ module ImageRuby
         end
       end
 
+      def inspect
+        "\##{sprintf("%02x%02x%02x",r,g,b)}#{a==255?"": a.to_s(16)}"
+      end
+
       define_colors "red" => [255,0,0], "green" => [0,255,0] , "blue" => [0,0,255],
                   "white" => [255,255,255], "silver" => [0xc0, 0xc0, 0xc0], "gray" => [0x80,0x80,0x80],
                   "black" => [0,0,0], "maroon" => [0x80,0,0], "yellow" => [0xff,0xff,0],
