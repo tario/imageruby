@@ -151,7 +151,7 @@ public
           (0..draw_width-1).each do |x_orig|
             color = orig_pixel_data[origpointer..origpointer+2]
 
-              alpha = image.alpha_data[y_orig*image.width+x_orig]
+              alpha = image.alpha_data[y_orig*image.width+x_orig].ord
 
                 if alpha < 255
                   if alpha > 0
