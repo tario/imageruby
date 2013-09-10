@@ -247,7 +247,7 @@ public
       strcolor1 = color1.to_s
       strcolor2 = color2.to_s
 
-      a = color2.a
+      a = color2.a.chr
 
       (0..width*height).each do |i|
         if pixel_data[i*3..i*3+2] == strcolor1 then
