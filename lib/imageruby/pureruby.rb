@@ -156,17 +156,17 @@ public
                 if alpha < 255
                   if alpha > 0
                     dest_pixel_data[destpointer] =
-                      ( orig_pixel_data[origpointer]*(alpha) + dest_pixel_data[destpointer]*(255-alpha) ) / 255
+                      (( orig_pixel_data[origpointer].ord*(alpha) + dest_pixel_data[destpointer].ord*(255-alpha) ) / 255).chr
                       origpointer = origpointer + 1
                       destpointer = destpointer + 1
 
                     dest_pixel_data[destpointer] =
-                      ( orig_pixel_data[origpointer]*(alpha) + dest_pixel_data[destpointer]*(255-alpha) ) / 255
+                      (( orig_pixel_data[origpointer].ord*(alpha) + dest_pixel_data[destpointer].ord*(255-alpha) ) / 255).chr
                       origpointer = origpointer + 1
                       destpointer = destpointer + 1
 
                     dest_pixel_data[destpointer] =
-                      ( orig_pixel_data[origpointer]*(alpha) + dest_pixel_data[destpointer]*(255-alpha) ) / 255
+                      (( orig_pixel_data[origpointer].ord*(alpha) + dest_pixel_data[destpointer].ord*(255-alpha) ) / 255).chr
                       origpointer = origpointer + 1
                       destpointer = destpointer + 1
 
