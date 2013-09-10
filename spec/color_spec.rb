@@ -1,4 +1,4 @@
-require "lib/imageruby"
+require "imageruby"
 
 include ImageRuby
 
