@@ -1,4 +1,6 @@
-0.2.4 fixed Color#inspect
+0.2.4 fixed read of pixel data on alpha combinations
+
+      fixed Color#inspect
 
       fixed require on specs requiring "imageruby" instead of "lib/imageruby"
 
