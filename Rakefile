@@ -6,7 +6,7 @@ require 'rdoc/task'
 
 spec = Gem::Specification.new do |s|
   s.name = 'imageruby'
-  s.version = '0.2.4'
+  s.version = '0.2.5'
   s.author = 'Dario Seminara'
   s.email = 'robertodarioseminara@gmail.com'
   s.platform = Gem::Platform::RUBY
