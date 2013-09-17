@@ -71,7 +71,7 @@ module ImageRuby
       @array[pointindex] = color.b.chr
 
       if color.a != 255 then
-        @alpha = "\xff"*(@height * @width) unless @alpha
+        @alpha = 255.chr*(@height * @width) unless @alpha
         @alpha[index] = color.a.chr
       end
 
@@ -101,7 +101,7 @@ module ImageRuby
     #   bitmap.pixel_data[(12)*bitmap.width+11] # the alpha value at x=12, y=11
     #   bitmap.pixel_data[(12)*bitmap.width+12] # the alpha value at x=12, y=12
     def alpha_data
-      @alpha = "\xff"*(@height * @width) unless @alpha
+      @alpha = 255.chr*(@height * @width) unless @alpha
       @alpha
     end
 
