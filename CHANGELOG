@@ -1,3 +1,5 @@
+0.2.5 fixed handling of encoding for string containing binary data 
+
 0.2.4 fixed read of pixel data on alpha combinations
 
       fixed Color#inspect
